@@ -37,9 +37,10 @@ def deleteFile(*files):
             pass
 
 def checkSoftware(software, env):
-    if env == 'bash':
+    lang, version = env
+    if lang == 'bash':
         install = which(software) is None
-    elif env == 'R':
+    elif lang == 'R':
         install = rpackages.isinstalled(software)
     return install
 

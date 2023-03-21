@@ -16,11 +16,21 @@ CENTER = 0.1
 COMPLEXITY_RATE = 0.05
 TX_SPLIT_MAX_SIZE=50000
 TX_SPLIT_OPT_SIZE=int(TX_SPLIT_MAX_SIZE * 0.3)
-THIRD_PARTY_SOFTWARE = {'bedtools':'bash', 'featureCounts':'bash', 'samtools':'bash', 'DESeq2':'R'}
+THIRD_PARTY_SOFTWARE = {'bedtools':['bash', '2.30.0'], \
+                        'featureCounts':['bash', '2.0.2'], \
+                        'samtools':['bash', '1.14'], \
+                        'DESeq2':['R', '1.32.0'], \
+                        'ggplot2':['R', '3.4.1']}
 #identifier
-ID_SEP_DICT={'labeltxid':'#=', 'txinfo':':=', 'genetx':'::', 'peakid':'|=', 'bedutils':'==', 'peakid_out':'|'}
-REF_PEAK_LABEL = 'POOL_REF'
-BINARY_APPENDIX = '.mbb'
+ID_SEP_DICT={'labeltxid':'#=',\
+             'txinfo':':=', \
+             'genetx':'::', \
+             'peakid':'|=', \
+             'bedutils':'==', \
+             'peakid_out':'|'}
+##prefix and appendix
+REF_PEAK_LABEL = 'PEALS_POOL_REF'
+BINARY_APPENDIX = '.pb'
 # CONSTANT TEMP NAME
 TEMP_PREFIX = "peals_tmp"
 # CONSTANT HELP

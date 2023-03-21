@@ -18,6 +18,7 @@ PEALS relies on the following third party software. Before installing PEALS, ple
  * [samtools (>=1.14)](http://www.htslib.org/download/)
  * [featureCounts (>=2.0.2)](https://subread.sourceforge.net/featureCounts.html)
  * [DESeq2 (>=1.32.0)](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
+ * [ggplot2 (>=3.4.1)](https://ggplot2.tidyverse.org/index.html)
 
 ## Install
 
