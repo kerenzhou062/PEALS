@@ -58,7 +58,7 @@ instead of posting to our
 
 ## Ackowledgement
 
-PEALS project is also based on the following python packages.
+PEALS project also relies on the following python packages.
 
  * [CSAPS](https://pypi.org/project/csaps/)
  * [findpeaks](https://pypi.org/project/findpeaks/)
