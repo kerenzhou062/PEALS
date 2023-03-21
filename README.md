@@ -53,9 +53,9 @@ peals project is relied on the following packages
 [CSAPS](https://chanzuckerberg.com/eoss/).
 [findpeaks](https://chanzuckerberg.com/eoss/).
 
-## Other useful links
+## Required third party software
 
- * [bedTools](http://code.google.com/p/bedtools/)
-
-
-
+ * [bedTools](https://bedtools.readthedocs.io/en/latest/content/installation.html)
+ * [samtools](http://www.htslib.org/download/)
+ * [featureCounts](https://subread.sourceforge.net/featureCounts.html)
+ * [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
