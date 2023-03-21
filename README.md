@@ -58,7 +58,7 @@ instead of posting to our
 
 ## Ackowledgement
 
-PEALS project is relied on the following packages
-[CSAPS](https://chanzuckerberg.com/eoss/).
-[findpeaks](https://chanzuckerberg.com/eoss/).
+PEALS project is also based on the following python packages:
+ * [CSAPS](https://chanzuckerberg.com/eoss/)
+ * [findpeaks](https://chanzuckerberg.com/eoss/)
 
