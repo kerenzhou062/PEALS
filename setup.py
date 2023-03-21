@@ -21,7 +21,6 @@ exec(open("PEALS/io/constant.py").read())
 
 # classifiers
 classifiers =[\
-              'Development Status :: 2 - Alpha',
               'Environment :: Console',
               'Intended Audience :: Developers',
               'Intended Audience :: Science/Research',
