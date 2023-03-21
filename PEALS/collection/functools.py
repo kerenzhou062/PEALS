@@ -23,6 +23,8 @@ import bottleneck as bn
 from csaps import csaps
 from sklearn import preprocessing
 from collections import defaultdict
+import rpy2.robjects.packages as rpackages
+from shutil import which
 
 from PEALS.collection import bamtool
 from PEALS.io import streamtools
@@ -33,6 +35,13 @@ def deleteFile(*files):
             os.remove(file)
         except:
             pass
+
+def checkSoftware(software, env):
+    if env == 'bash':
+        install = which(software) is None
+    elif env == 'R':
+        install = rpackages.isinstalled(software)
+    return install
 
 def delTempFile(options):
     tempFileList = list(pathlib.Path(options.tempdir).glob(options.tempre + "*"))

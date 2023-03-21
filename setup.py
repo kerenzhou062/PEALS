@@ -16,7 +16,7 @@ import subprocess
 import sysconfig
 import numpy
 
-# get MACS version
+# get PEALS version
 exec(open("PEALS/io/constant.py").read())
 
 # classifiers

@@ -1,1 +1,61 @@
-Peak-based Enhancement Analysis pipeLine for MeRIP-Seq
+# PEALS: Peak-based Enhancement Analysis PipeLine for MeRIP-Seq
+
+Latest Release:
+* Github: [![Github Release](https://img.shields.io/github/v/release/peals-project/PEALS)](https://github.com/kerenzhou062/PEALS/releases)
+* PyPI: [![PyPI Release](https://img.shields.io/pypi/v/peals.svg) ![PyPI Python Version](https://img.shields.io/pypi/pyversions/peals) ![PyPI Format](https://img.shields.io/pypi/format/peals)](https://pypi.org/project/peals/)
+
+## Introduction
+
+MeRIP-seq stands for methylated RNA immunoprecipitation sequencing, which is the most popular method for detection of post-transcriptional RNA modifications. Here, we presented
+the **P**-based **E**nhancement **A**nalysis Pipe**L**ine for MeRIP-**S**eq (PEALS), for
+identifying enriched methylation regions. PEALS is designed for capturing the enriched methylated regions from MeRIP-seq, where IP signals are significantly over the input signals. Unlike other tools, PEALS not only can detect the peaks across the exons, but also can detect 
+
+## Install
+
+The common way to install PEALS is through
+[PYPI](https://pypi.org/project/peals/)) or
+[INSTALL](./docs/INSTALL.md) document for detail.
+
+## Usage
+
+Example for regular peak calling on MeRIP-seq:
+
+`peals callpeak -i <bam directory> -m <sample matrix> -P <prefix> -o <output directory>`
+
+Example for differentially methylated peak calling on MeRIP-seq:
+
+`peals diffpeak -i <bam directory> -m <sample matrix> -P <prefix> -o <output directory>`
+
+
+Subcommand | Description
+-----------|----------
+[`callpeak`](./docs/callpeak.md) | Main function to call peaks from alignment results.
+[`diffpeak`](./docs/diffpeak.md) | Main function to call differentially methylated peaks from alignment results.
+
+For advanced usage, for example, to run `peals` in a modular way,
+please read the [advanced usage](./docs/advanced_usage.md). There is a
+[Q&A](./docs/qa.md) document where we collected some common questions
+from users.
+
+## Contribute
+
+Please read our [CODE OF CONDUCT](./CODE_OF_CONDUCT.md) and
+[How to contribute](./CONTRIBUTING.md) documents. If you have any
+questions, suggestion/ideas, or just want to have conversions with
+developers and other users in the community, we recommand you use the
+[PEALS Discussions](https://github.com/peals-project/PEALS/discussions)
+instead of posting to our
+[Issues](https://github.com/peals-project/PEALS/issues) page.
+
+## Ackowledgement
+
+peals project is relied on the following packages
+[CSAPS](https://chanzuckerberg.com/eoss/).
+[findpeaks](https://chanzuckerberg.com/eoss/).
+
+## Other useful links
+
+ * [bedTools](http://code.google.com/p/bedtools/)
+
+
+

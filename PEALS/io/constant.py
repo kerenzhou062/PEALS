@@ -16,6 +16,7 @@ CENTER = 0.1
 COMPLEXITY_RATE = 0.05
 TX_SPLIT_MAX_SIZE=50000
 TX_SPLIT_OPT_SIZE=int(TX_SPLIT_MAX_SIZE * 0.3)
+THIRD_PARTY_SOFTWARE = {'bedtools':'bash', 'featureCounts':'bash', 'samtools':'bash', 'DESeq2':'R'}
 #identifier
 ID_SEP_DICT={'labeltxid':'#=', 'txinfo':':=', 'genetx':'::', 'peakid':'|=', 'bedutils':'==', 'peakid_out':'|'}
 REF_PEAK_LABEL = 'POOL_REF'

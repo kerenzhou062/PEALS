@@ -42,6 +42,22 @@ def checkArgsEqual(option1, option2, optionName1, optionName2):
         logging.error("The number of input arguments of '--{}' and '--{}' option should be the same!".format(optionName1, optionName2))
         sys.exit(1)
 
+def checkThirdParty(options):
+    logging.info("Checking whether required third party software are properly installed...")
+    installFlag = True
+    failureList = []
+    for software in sorted(options.thirdparty.keys()):
+        env = options.thirdparty[software]
+        install = functools.checkSoftware(software, env)
+        if install is False:
+            failureList.append(software)
+    if len(failureList) > 1:
+        softwares = ', '.join(failureList)
+        logging.error("The following third party sofware is not installed or not found in your path environment: ({}).".format(softwares))
+        sys.exit(1)
+    else:
+        logging.info("Congratulations! All required third party software are properly installed!")
+
 def checkThead(options):
     if options.thread > 64:
         ## Value for argumant -T is out of range: 1 to 64, limited by featureCounts
@@ -226,6 +242,8 @@ def validateCallpeakArgs(options):
     options.warn  = logging.warning
     options.debug = logging.debug
     options.info  = logging.info
+    ## check requried third party software
+    checkThirdParty(options)
     ## check sample matrix
     checkMatrixFile(options)
     # determin outputdir
@@ -239,6 +257,7 @@ def validateCallpeakArgs(options):
     options.labelref = REF_PEAK_LABEL
     options.txoptsize = int(options.txsizemax * 0.2)
     options.version = VERSION
+    options.thirdparty = THIRD_PARTY_SOFTWARE
     ## construct peak regex
     peakidsep = options.idsepdict['peakid'].replace('|', '\\|')
     options.peakregex = r'{0}\d+{0}T$'.format(peakidsep)
@@ -270,6 +289,8 @@ def validateDiffpeakArgs(options):
     options.warn  = logging.warning
     options.debug = logging.debug
     options.info  = logging.info
+    ## check requried third party software
+    checkThirdParty(options)
     ## check sample matrix
     checkMatrixFile(options)
     # determin outputdir
@@ -283,6 +304,7 @@ def validateDiffpeakArgs(options):
     options.labelref = REF_PEAK_LABEL
     options.txoptsize = int(options.txsizemax * 0.3)
     options.version = VERSION
+    options.thirdparty = THIRD_PARTY_SOFTWARE
     ## construct peak regex
     peakidsep = options.idsepdict['peakid'].replace('|', '\\|')
     options.peakregex = r'{0}\d+{0}T$'.format(peakidsep)
