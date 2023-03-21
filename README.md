@@ -8,7 +8,7 @@ Latest Release:
 
 MeRIP-seq stands for methylated RNA immunoprecipitation sequencing, which is the most popular method for detection of post-transcriptional RNA modifications. Here, we presented
 the **P**-based **E**nhancement **A**nalysis Pipe**L**ine for MeRIP-**S**eq (PEALS), for
-identifying enriched methylation regions. PEALS is designed for capturing the enriched methylated regions from MeRIP-seq, where IP signals are significantly over the input signals. Unlike other tools, PEALS not only can detect the peaks across the exons, but also can detect 
+identifying enriched methylation regions. PEALS is designed for capturing the enriched methylated regions from MeRIP-seq, where IP signals are significantly over the input signals. Unlike other tools, PEALS not only can detect the peaks located across the exons, but also can detect peaks located in introns. It will be very usefull to detect the methylated peaks in caRNAs, primary transcripts, etc. After peak detections, PEALS wrap DESeq2 framework to estimate the enrichment and their significance. When detecting the differentially methylated (DM) peaks, PEALS use complex strategies to normalized the reads count under different conditions to avoid over-normalization.
 
 ## Install
 
