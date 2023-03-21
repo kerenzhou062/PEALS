@@ -58,7 +58,7 @@ instead of posting to our
 
 ## Ackowledgement
 
-peals project is relied on the following packages
+PEALS project is relied on the following packages
 [CSAPS](https://chanzuckerberg.com/eoss/).
 [findpeaks](https://chanzuckerberg.com/eoss/).
 
