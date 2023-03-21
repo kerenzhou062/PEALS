@@ -1,0 +1,5 @@
+id	library	condition	replicate	label	bam	binary
+MOLM13_152_input_rep1	input	treated	1	MOLM13_152_rep1	MOLM13_152_input_rep1.genome.sorted.bam	MOLM13_152_rep1.mbb
+MOLM13_152_input_rep2	input	treated	2	MOLM13_152_rep2	MOLM13_152_input_rep2.genome.sorted.bam	MOLM13_152_rep2.mbb
+MOLM13_152_IP_rep1	ip	treated	1	MOLM13_152_rep1	MOLM13_152_IP_rep1.genome.sorted.bam	MOLM13_152_rep1.mbb
+MOLM13_152_IP_rep2	ip	treated	2	MOLM13_152_rep2	MOLM13_152_IP_rep2.genome.sorted.bam	MOLM13_152_rep2.mbb
