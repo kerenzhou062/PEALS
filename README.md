@@ -10,6 +10,13 @@ MeRIP-seq stands for methylated RNA immunoprecipitation sequencing, which is the
 the **P**-based **E**nhancement **A**nalysis Pipe**L**ine for MeRIP-**S**eq (PEALS), for
 identifying enriched methylation regions. PEALS is designed for capturing the enriched methylated regions from MeRIP-seq, where IP signals are significantly over the input signals. Unlike other tools, PEALS not only can detect the peaks located across the exons, but also can detect peaks located in introns. It will be very usefull to detect the methylated peaks in caRNAs, primary transcripts, etc. After peak detections, PEALS wrap DESeq2 framework to estimate the enrichment and their significance. When detecting the differentially methylated (DM) peaks, PEALS use complex strategies to normalized the reads count under different conditions to avoid over-normalization.
 
+## Required third party software
+
+ * [bedTools](https://bedtools.readthedocs.io/en/latest/content/installation.html)
+ * [samtools](http://www.htslib.org/download/)
+ * [featureCounts](https://subread.sourceforge.net/featureCounts.html)
+ * [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
+
 ## Install
 
 The common way to install PEALS is through
@@ -53,9 +60,3 @@ peals project is relied on the following packages
 [CSAPS](https://chanzuckerberg.com/eoss/).
 [findpeaks](https://chanzuckerberg.com/eoss/).
 
-## Required third party software
-
- * [bedTools](https://bedtools.readthedocs.io/en/latest/content/installation.html)
- * [samtools](http://www.htslib.org/download/)
- * [featureCounts](https://subread.sourceforge.net/featureCounts.html)
- * [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
