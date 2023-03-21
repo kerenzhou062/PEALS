@@ -12,10 +12,12 @@ identifying enriched methylation regions. PEALS is designed for capturing the en
 
 ## Required third party software
 
- * [bedTools](https://bedtools.readthedocs.io/en/latest/content/installation.html)
- * [samtools](http://www.htslib.org/download/)
- * [featureCounts](https://subread.sourceforge.net/featureCounts.html)
- * [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
+PEALS relies on the following third party software. Before installing PEALS, please to ensure the following software have been properly installed.
+
+ * [bedTools (>=2.30.0)](https://bedtools.readthedocs.io/en/latest/content/installation.html)
+ * [samtools (>=1.14)](http://www.htslib.org/download/)
+ * [featureCounts (>=2.0.2)](https://subread.sourceforge.net/featureCounts.html)
+ * [DESeq2 (>=1.32.0)](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
 
 ## Install
 
