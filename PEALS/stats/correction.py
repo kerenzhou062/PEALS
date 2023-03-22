@@ -87,7 +87,7 @@ def normalizeByEnrichment(options, peakReadCountDf, geneInputReadCountDf):
     ## using all corrected peak regions to calculate the IP enrichment factor
     peakIpFilterDf = peakIpDf.loc[peakidList, :]
     peakOnlyIpDf = peakIpFilterDf[peakIpFilterDf.index.str.contains(options.peakregex, regex = True)]
-    if options.estipeffiency == 'within':
+    if options.estipeff == 'within':
         ## normalize by the library size first
         libSizeDf = subMatrixDf.loc[ipBamidList, :]['lib_size']
         libSizeFactor = libSizeDf.div(libSizeDf.min())
@@ -109,7 +109,7 @@ def normalizeByEnrichment(options, peakReadCountDf, geneInputReadCountDf):
             options.debug("Normalize IP read counts ({}) by estimated IP efficiency factor:\n".format(condition) + ipSizeFactorSeries.to_markdown())
             ## combine ip and input size factors
             peakNorIpDf.loc[:, bamidList] = normalizeCountDf(peakNorIpDf.loc[:, bamidList], ipSizeFactorSeries)
-    elif options.estipeffiency == 'across':
+    elif options.estipeff == 'across':
         ## only use peaks that are higher than 25% in all samples
         peakOnlyIpDf = peakOnlyIpDf[ peakOnlyIpDf > peakOnlyIpDf.quantile(0.25) ]
         peakidList = peakOnlyIpDf.index.to_list()

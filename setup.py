@@ -14,7 +14,6 @@ import re
 from setuptools import setup, Extension
 import subprocess
 import sysconfig
-import numpy
 
 # get PEALS version
 exec(open("PEALS/io/constant.py").read())
@@ -32,14 +31,19 @@ classifiers =[\
 
 installRequires = [ "numpy>=1.21.2",
                      "pandas>=1.1.4",
+                     "scipy>=1.7.1",
                      "pysam>=0.16.0.1",
                      "psutil>=5.9.4",
                      "pyBigWig>=0.3.18",
-                     "tqdm>=tqdm",
+                     "tqdm>=4.64.1",
                      "rpy2>=3.4.5",
                      "mpmath>=1.1.0",
                      "findpeaks>=2.1.7",
                      "csaps>=1.1.0",
+                     "bottleneck>=1.3.2",
+                     "scikit-learn>=0.24.2",
+                     "networkx>=2.5.1",
+                     "fisher>=0.1.10",
                      "setuptools>=45.2.0",
                      "pytest>=5.4.1"
                     ]
@@ -60,12 +64,13 @@ def main():
            description = "Peak-based Enhancement Analysis Pipeline for MeRIP-Seq",
            long_description = longDescription,
            long_description_content_type = "text/markdown",
+           include_package_data=True,
            author = 'Keren Zhou',
            author_email = 'zhoukr062@gmail.com',
            url = 'http://github.com/kerenzhou062/PEALS/',
            package_dir = {'PEALS' : 'PEALS'},
            packages = ['PEALS', 'PEALS.io', 'PEALS.collection', 'PEALS.peak', 'PEALS.stats', 'PEALS.subcmd'],
-           package_data = {'PEALS':['*.pxd']},
+           package_data = {'PEALS.stats':['*.R']},
            scripts = ['bin/peals', ],
            classifiers = classifiers,
            install_requires = installRequires,

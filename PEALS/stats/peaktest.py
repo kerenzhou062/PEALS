@@ -234,7 +234,7 @@ def runGlmNbinomTest(options, peakReadCountDf, plot=True, skipSubplot=False):
         reduced = '1'
         skipsize = '--skipsize'
     if options.formula is not None:
-        formula = options.formula + ' + condition '
+        formula = options.formula
     if inputType == 'gene':
         skipsize = ''
         if options.shrink == 'none':

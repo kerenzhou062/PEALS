@@ -1,1 +1,1 @@
-__all__ = ["optioncheck", "bamtool", "bedutils", "functools", "gfftools", ]
+__all__ = ["optioncheck", "bamtool", "bedutils", "functools", "gfftools" ]

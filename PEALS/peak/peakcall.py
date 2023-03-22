@@ -242,9 +242,9 @@ def runCallPeakPerTxParallel(options, bamList, chromTxDict, txBedDict):
         ## using generator with semaphore to lock and release thread to avoid any stucks
         bulkArgsGenerator = prepareCallPeakPerTxBulkArgs(options, semaphore, chromList, chromTxDict, txBedDict, ipBgCovDf, inputBgCovDf, scaleFactorList)
         imapUnordered = pool.imap_unordered(callPeakPerTx, bulkArgsGenerator)
-        if options.verbose == 3:
+        if options.verbose >= 2:
             miniters = int(taskCount / 50)
-            barFormat = 'DEBUG @ Peak-calling status: {percentage:3.0f}% [elapsed: {elapsed}|estiamted remaining:{remaining}]\n'
+            barFormat = 'INFO @ Peak-calling status: {percentage:3.0f}% [elapsed: {elapsed}|estiamted remaining:{remaining}]\n'
             for result in tqdm.tqdm(imapUnordered, total=taskCount, mininterval=60, maxinterval=120, miniters=miniters, position=0, leave=True, ascii=True, bar_format=barFormat):
                 if bool(result):
                     txPeakCallResultList.append(result)

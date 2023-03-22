@@ -41,7 +41,7 @@ def prepare_argparser ():
     """Prepare optparser object. New options will be added in this
     function first.
     """
-    description = "%(prog)s -- Peak-based Enhancement Analysis pipeLine for MeRIP-Seq"
+    description = "%(prog)s -- Peak-based Enhancement Analysis PipeLine for MeRIP-Seq"
     epilog = "For command line options of each command, type: %(prog)s COMMAND -h"
     # top-level parser
     argparser = ap.ArgumentParser( description = description, epilog = epilog ) #, usage = usage )
@@ -91,6 +91,7 @@ def add_output_option ( parser ):
                         default = False,
                         help = "Keep the temporary files")
     parser.add_argument( "--verbose", dest = "verbose", type = int,
+                        choices=[0, 1, 2, 3],
                         default = 2,
                         help = "Set verbose level of runtime message. 0: only show critical message, 1: show additional warning message, 2: show process information, 3: show debug messages." )
 
@@ -114,7 +115,7 @@ def add_normalize_option ( parser ):
     parser.add_argument("--exp-method", dest = "expmethod", type = str,
                         choices = ['count', 'TPM', 'FPKM'],
                         default = 'count',
-                        help = "The method to estimate gene expression.")
+                        help = "The method to estimate gene expression (mainly used for filter non-expressed genes).")
     parser.add_argument("--estpeak-sizefactor", dest = "peaksizefactor", type = str,
                         choices = ['peak', 'gene'],
                         default = 'peak',
@@ -189,7 +190,7 @@ def add_peak_option ( parser ):
                         help = "Method used to smooth the data points before calling cubic spline function.")
     parser.add_argument("--span", dest = "span", type = int,
                         default = SMOOTH_SPAN,
-                        help = "The #bp of span used to smooth the data points before calling cubic spline function.")
+                        help = "The #bp of span used by --span-method.")
     parser.add_argument("--span-loop", dest = "spanloop", type = int,
                         default = SMOOTH_LOOP,
                         help = "The loop time of smoothing method.")
@@ -199,7 +200,7 @@ def add_peak_option ( parser ):
     parser.add_argument("--lookahead", dest = "lookahead", type = int,
                         default = LOOK_AHEAD,
                         help = "The distance to look ahead from a peak candidate to determine if it is the actual peak.")
-    parser.add_argument("--csaps-p", dest = "csapssmooth", type = float,
+    parser.add_argument("--csaps-p", dest = "csapsp", type = float,
                         default = CSAPS_SMOOTH,
                         help = "The constant smooth parameter p passed to csaps().")
     parser.add_argument("--peak-size", dest = "peaksize", type = int,
@@ -225,7 +226,7 @@ def add_model_option ( parser ):
                         default = "Wald",
                         help="The test method for calculating p-value (DESeq2).")
     parser.add_argument("--formula", dest = "formula", action="store", type=str,
-                        help="The design formula passed to DESeq2().")
+                        help="The design formula passed to DESeq2(). Will overwrite the default formula")
 
 def add_filter_option ( parser ):
     parser.add_argument("-p", "--pval", dest = "pvalcutoff", type = float,
@@ -306,10 +307,10 @@ def add_diffpeak_parser( subparsers ):
     ## group for normalization options
     group_normalize = argparser_callpeak.add_argument_group( "Normalization options arguments" )
     add_normalize_option ( group_normalize )
-    group_normalize.add_argument("--estip-effiency", dest = "estipeffiency", type = str,
+    group_normalize.add_argument("--estip-eff", dest = "estipeff", type = str,
                         choices = ['within', 'across'],
                         default = 'within',
-                        help = "How estimate the IP efficiency factors of control and treated conditions. If 'within' is specified, will estimate IP efficiency factors within each condition. \
+                        help = "How estimate the IP efficiency factors of control and treated conditions. If 'within' is specified, it will estimate IP efficiency factors within each condition, repspectively. \
                         If 'across' is specified, will estimate IP efficiency factors across 2 conditions.")
     ## group for constant options
     group_constant = argparser_callpeak.add_argument_group( "Constants arguments" )
@@ -327,7 +328,7 @@ def add_diffpeak_parser( subparsers ):
     group_filter = argparser_callpeak.add_argument_group( "Filter arguments" )
     group_filter.add_argument("-f", "--fold", dest = "foldcutoff", type = float,
                         default = 2,
-                        help = "If specified, only peaks have fold change (IP/input) (>= fold or <= 1/fold) will be recognized significant peaks.")
+                        help = "If specified, only peaks have fold change (IP/input) in either conditions (>= fold) will be recognized significant peaks.")
     add_filter_option( group_filter )
     group_filter.add_argument("-F", "--diff-fold", dest = "difffoldcutoff", type = float,
                         default = 1,

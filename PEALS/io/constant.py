@@ -1,5 +1,5 @@
 # CONSTANT VALUE
-VERSION = '1.2'
+VERSION = '1.2.0'
 BUFFER_SIZE = 10000000
 THREAD = 10
 THREAD_START_METHOD="fork"
@@ -20,7 +20,9 @@ THIRD_PARTY_SOFTWARE = {'bedtools':['bash', '2.30.0'], \
                         'featureCounts':['bash', '2.0.2'], \
                         'samtools':['bash', '1.14'], \
                         'DESeq2':['R', '1.32.0'], \
-                        'ggplot2':['R', '3.4.1']}
+                        'ashr':['R', '2.2.54'], \
+                        'apeglm':['R', '1.14.0'], \
+                        'ggplot2':['R', '3.4.1'],}
 #identifier
 ID_SEP_DICT={'labeltxid':'#=',\
              'txinfo':':=', \

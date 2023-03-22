@@ -24,6 +24,7 @@ import psutil
 
 from PEALS.collection import functools
 from PEALS.io.constant import *
+from PEALS.io import paramlog
 
 cpuCount = psutil.cpu_count()
 
@@ -242,8 +243,6 @@ def validateCallpeakArgs(options):
     options.warn  = logging.warning
     options.debug = logging.debug
     options.info  = logging.info
-    ## check requried third party software
-    checkThirdParty(options)
     ## check sample matrix
     checkMatrixFile(options)
     # determin outputdir
@@ -257,7 +256,6 @@ def validateCallpeakArgs(options):
     options.labelref = REF_PEAK_LABEL
     options.txoptsize = int(options.txsizemax * 0.2)
     options.version = VERSION
-    options.thirdparty = THIRD_PARTY_SOFTWARE
     ## construct peak regex
     peakidsep = options.idsepdict['peakid'].replace('|', '\\|')
     options.peakregex = r'{0}\d+{0}T$'.format(peakidsep)
@@ -267,6 +265,11 @@ def validateCallpeakArgs(options):
     ## 
     if options.thread >= cpuCount:
         options.thread = max(cpuCount, 1)
+    ## print the running parameters
+    paramlog.log(options)
+    ## check requried third party software
+    options.thirdparty = THIRD_PARTY_SOFTWARE
+    checkThirdParty(options)
     return options
 
 def validateDiffpeakArgs(options):
@@ -289,8 +292,6 @@ def validateDiffpeakArgs(options):
     options.warn  = logging.warning
     options.debug = logging.debug
     options.info  = logging.info
-    ## check requried third party software
-    checkThirdParty(options)
     ## check sample matrix
     checkMatrixFile(options)
     # determin outputdir
@@ -304,7 +305,6 @@ def validateDiffpeakArgs(options):
     options.labelref = REF_PEAK_LABEL
     options.txoptsize = int(options.txsizemax * 0.3)
     options.version = VERSION
-    options.thirdparty = THIRD_PARTY_SOFTWARE
     ## construct peak regex
     peakidsep = options.idsepdict['peakid'].replace('|', '\\|')
     options.peakregex = r'{0}\d+{0}T$'.format(peakidsep)
@@ -314,5 +314,9 @@ def validateDiffpeakArgs(options):
     ## 
     if options.thread >= cpuCount:
         options.thread = max(cpuCount, 1)
-    ## 
+    ## print the running parameters
+    paramlog.log(options)
+    ## check requried third party software
+    options.thirdparty = THIRD_PARTY_SOFTWARE
+    checkThirdParty(options)
     return options

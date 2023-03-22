@@ -22,7 +22,7 @@ from PEALS.io import signals
 from PEALS.io import streamtools
 
 # ------------------------------------
-# MECAMS python modules
+# PEALS python modules
 # ------------------------------------
 from PEALS.collection import optioncheck
 # ------------------------------------
@@ -30,7 +30,7 @@ from PEALS.collection import optioncheck
 # ------------------------------------
 
 def run( args ):
-    """The Main function/pipeline for MECAMS.
+    """The Main function/pipeline for PEALS.
     """
     # Parse options...
     startTime = time.monotonic()
@@ -47,8 +47,6 @@ def run( args ):
     warn = options.warn
     debug = options.debug
     error = options.error
-    ##
-    info("Running MECAMS ({}) with {} threads.".format(options.version, options.thread))
     ## prefix for tempory file, including path
     tempPrefix = os.path.join(options.tempdir, "_".join([options.tempre, options.prefix]))
     ## prepare genome information
@@ -140,8 +138,8 @@ def run( args ):
     if sampleCount == 1:
         ### running code
         peakReadCountDf = peakutils.getPeakReadCountsDf(options, poolPeakRowList, AlltestBamList, normalize=False)
-        #pickle.dump( peakReadCountDf, open(options.outputdir + '/mecams_tmp_peakReadCountDf.tmp', "wb") )
-        #pickle.dump( options, open(options.outputdir + '/mecams_tmp_options.tmp', "wb") )
+        #pickle.dump( peakReadCountDf, open(options.outputdir + '/PEALS_tmp_peakReadCountDf.tmp', "wb") )
+        #pickle.dump( options, open(options.outputdir + '/PEALS_tmp_options.tmp', "wb") )
         testResDf = peaktest.runFisherTest(options, peakReadCountDf)
     else:
         ## inputand ip reads for peak

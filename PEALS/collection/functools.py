@@ -6,7 +6,8 @@
 __author__ = "Keren Zhou"
 __version__ = "v1.0"
 
-import os, errno
+import os
+import errno
 import sys
 import subprocess
 import statistics
@@ -39,7 +40,7 @@ def deleteFile(*files):
 def checkSoftware(software, env):
     lang, version = env
     if lang == 'bash':
-        install = which(software) is None
+        install = which(software) is not None
     elif lang == 'R':
         install = rpackages.isinstalled(software)
     return install
@@ -532,7 +533,7 @@ def smoothCsaps(options, npArr):
     span = options.span
     spanmethod = options.spanmethod
     spanloop = options.spanloop
-    csapssmooth = options.csapssmooth
+    csapsp = options.csapsp
     ## make span not exceed array length
     maxSpan = max(2, int(npArr.size / 50))
     if span > maxSpan:
@@ -542,10 +543,10 @@ def smoothCsaps(options, npArr):
     indexArr = np.arange(npArr.size)
     #print(smooth)
     weights = preprocessing.normalize([npArr], norm="l2")[0]
-    weights[weights < csapssmooth] = weights[weights < csapssmooth] + csapssmooth
+    weights[weights < csapsp] = weights[weights < csapsp] + csapsp
     weights[weights > 1] = 1
-    #weights = weights * csapssmooth
-    smooth = 1/ math.log(indexArr.size) * csapssmooth
+    #weights = weights * csapsp
+    smooth = 1/ math.log(indexArr.size) * csapsp
     try:
         npSmoothArr = csaps(indexArr, npArr, indexArr, weights=weights, smooth=smooth, normalizedsmooth=True)
     except RuntimeError as e:

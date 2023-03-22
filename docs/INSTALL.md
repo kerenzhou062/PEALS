@@ -1,5 +1,5 @@
-# INSTALL Guide For MACS3
-Time-stamp: <2020-12-05 16:35:26 Tao Liu>
+# INSTALL Guide For PEALS
+Time-stamp: <2023-03-21 16:35:26 Keren Zhou>
 
 Please check the following instructions to complete your installation.
 
@@ -7,7 +7,7 @@ Please check the following instructions to complete your installation.
 
 ### Python3
 
-MACS v3.x.x requires Python3. We have tested MACS in Python3.6, 3.7 and 3.8. 
+PEALS requires Python3. We have tested MACS in Python3.6, 3.7 and 3.8. 
 
 ### NumPy
 
@@ -22,19 +22,19 @@ code. The version of Cython has to be >=0.29.
 
 [cykhash](https://github.com/realead/cykhash) is a fast and efficient
 hash implementation in Cython. It is used to replace python dictionary
-in MACS3 codes. Since it requires Cython, make sure you install Cython
+in PEALS codes. Since it requires Cython, make sure you install Cython
 first, then install cykhash. 
 
 ### fermi-lite and simde
 
-A newly added `callvar` subcommand in MACS3 uses
+A newly added `callvar` subcommand in PEALS uses
 [fermi-lite](https://github.com/lh3/fermi-lite) to assemble the DNA
 sequence in a peak region while necessary. A modified fermi-lite has
-been included in MACS3 package. Since fermi-lite was implemented using
+been included in PEALS package. Since fermi-lite was implemented using
 intel SSE2 intrinsics for x86 CPUs, we added
 [simde](https://github.com/simd-everywhere/simde) as submodule to
 solve the compatibility issues on non-x86 architectures. Note that, we
-may remove this submodule and add simde in *dependencies* of MACS3
+may remove this submodule and add simde in *dependencies* of PEALS
 later.
 
 ### GCC and Python-dev 
@@ -68,15 +68,15 @@ it's not available in your system. If you create a virtual environment
 as described before, your `pip` command will install everything under
 the folder you specified previously through `python3 -m env` command.
 
-Then under the command line, type `pip install macs3`. PyPI will
+Then under the command line, type `pip install PEALS`. PyPI will
 install Numpy automatically if it is absent.
 
-To upgrade MACS3, type `pip install --upgrade macs3`. It will check
-currently installed MACS3, compare the version with the one on PyPI
+To upgrade PEALS, type `pip install --upgrade PEALS`. It will check
+currently installed PEALS, compare the version with the one on PyPI
 repository, download and install a newer version while necessary.
 
 If you plan to install MACS in your own user directory, use `pip
-install macs3 --user`.
+install PEALS --user`.
 
 ## Install from source
 
