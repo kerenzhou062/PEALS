@@ -535,22 +535,24 @@ def smoothCsaps(options, npArr):
     spanloop = options.spanloop
     csapsp = options.csapsp
     ## make span not exceed array length
-    maxSpan = max(2, int(npArr.size / 50))
-    if span > maxSpan:
-        span = maxSpan
-    ## smooth first
-    npArr = smoothMove(npArr, 'move', span=span, loop=1, backward=True)
+    maxSpan = max(2, span, int(npArr.size / 50))
     indexArr = np.arange(npArr.size)
     #print(smooth)
-    weights = preprocessing.normalize([npArr], norm="l2")[0]
-    weights[weights < csapsp] = weights[weights < csapsp] + csapsp
-    weights[weights > 1] = 1
+    if options.csapsnor is False:
+        weights = preprocessing.normalize([npArr], norm="l2")[0]
+        weights[weights < csapsp] = weights[weights < csapsp] + csapsp
+        weights[weights > 1] = 1
     #weights = weights * csapsp
     smooth = 1/ math.log(indexArr.size) * csapsp
     try:
-        npSmoothArr = csaps(indexArr, npArr, indexArr, weights=weights, smooth=smooth, normalizedsmooth=True)
+        if options.csapsnor is False:
+            npSmoothArr = csaps(indexArr, npArr, indexArr, weights=weights, smooth=smooth)
+        else:
+            npSmoothArr = csaps(indexArr, npArr, indexArr, smooth=smooth, normalizedsmooth=True)
+        ## smooth first
+        npSmoothArr = smoothMove(npSmoothArr, 'move', span=maxSpan, loop=spanloop, backward=True)
     except RuntimeError as e:
-        npSmoothArr = smoothMove(npArr, 'move', span=span, loop=3, backward=True)
+        npSmoothArr = smoothMove(npArr, 'move', span=maxSpan, loop=3, backward=True)
     return npSmoothArr
 
 def findConGroup(npArr, stepSize=1):
