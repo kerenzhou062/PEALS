@@ -530,29 +530,22 @@ def smoothMove(valueList, method, span=10, loop=1, backward=False):
     return smoothValList
 
 def smoothCsaps(options, npArr):
-    span = options.span
     spanmethod = options.spanmethod
-    spanloop = options.spanloop
     csapsp = options.csapsp
     ## make span not exceed array length
-    maxSpan = max(2, span, int(npArr.size / 50))
+    optSpan = max(2, int(npArr.size / 80))
     indexArr = np.arange(npArr.size)
-    #print(smooth)
-    if options.csapsnor is False:
-        weights = preprocessing.normalize([npArr], norm="l2")[0]
-        weights[weights < csapsp] = weights[weights < csapsp] + csapsp
-        weights[weights > 1] = 1
-    #weights = weights * csapsp
-    smooth = 1/ math.log(indexArr.size) * csapsp
+    ## estimate weights for each point
+    weights = preprocessing.normalize([npArr], norm="l2")[0]
+    weights[weights < csapsp] = weights[weights < csapsp] + csapsp
+    weights[weights > 1] = 1
+    smooth = 1 / math.log(indexArr.size) * csapsp
     try:
-        if options.csapsnor is False:
-            npSmoothArr = csaps(indexArr, npArr, indexArr, weights=weights, smooth=smooth)
-        else:
-            npSmoothArr = csaps(indexArr, npArr, indexArr, smooth=smooth, normalizedsmooth=True)
-        ## smooth first
-        npSmoothArr = smoothMove(npSmoothArr, 'move', span=maxSpan, loop=spanloop, backward=True)
+        csapsSmoothArr = csaps(indexArr, npArr, indexArr, weights=weights, smooth=smooth)
+        ## smooth again with move average
+        npSmoothArr = smoothMove(csapsSmoothArr, 'move', span=optSpan, loop=1, backward=True)
     except RuntimeError as e:
-        npSmoothArr = smoothMove(npArr, 'move', span=maxSpan, loop=3, backward=True)
+        npSmoothArr = smoothMove(npArr, 'move', span=optSpan, loop=3, backward=True)
     return npSmoothArr
 
 def findConGroup(npArr, stepSize=1):

@@ -12,7 +12,7 @@ EXT_SIZE = 0
 LOOK_AHEAD = 25
 CSAPS_SMOOTH = 0.005
 IP_RATIO = 1.25
-CENTER = 0.1
+CENTER = 0.25
 COMPLEXITY_RATE = 0.05
 TX_SPLIT_MAX_SIZE=50000
 TX_SPLIT_OPT_SIZE=int(TX_SPLIT_MAX_SIZE * 0.3)
@@ -38,13 +38,13 @@ TEMP_PREFIX = "peals_tmp"
 # CONSTANT HELP
 EPILOG_CALL_PEAK = """
 Examples:
-Peak calling for regular MeRIP-seq:
+Peak calling for MeRIP-seq:
     $ peals callpeak -i <bam directory> -m <sample matrix> -P <prefix> -o <output directory>
 """
 
 EPILOG_DIFF_PEAK = """
 Examples:
-Differential peak calling for regular MeRIP-seq:
+Differential peak calling for MeRIP-seq:
     $ peals diffpeak -i <bam directory> -m <sample matrix> -P <prefix> -o <output directory>
 """
 

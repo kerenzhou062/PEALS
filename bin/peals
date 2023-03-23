@@ -187,13 +187,10 @@ def add_peak_option ( parser ):
     parser.add_argument("--span-method", dest = "spanmethod", type = str,
                         choices = ["move", "none"],
                         default = MOVE_METHOD,
-                        help = "Method used to smooth the data points before calling cubic spline function.")
-    parser.add_argument("--span", dest = "span", type = int,
-                        default = SMOOTH_SPAN,
-                        help = "The #bp of span used by --span-method.")
+                        help = "Method used to further smooth the coverage data on transcript after calling CSAPS model.")
     parser.add_argument("--span-loop", dest = "spanloop", type = int,
                         default = SMOOTH_LOOP,
-                        help = "The loop time of smoothing method.")
+                        help = "How many times that apply the method indicated by '--span-method' after calling CSAPS model.")
     parser.add_argument("--complexity-rate", dest = "comprate", type = float,
                         default = COMPLEXITY_RATE,
                         help = "If the complexity of signals in a detected region is lower than this value (eg., high PCR duplicates), then this region will no be considered as a peak candidates.")
@@ -202,15 +199,15 @@ def add_peak_option ( parser ):
                         help = "The distance to look ahead from a peak candidate to determine if it is the actual peak.")
     parser.add_argument("--csaps-p", dest = "csapsp", type = float,
                         default = CSAPS_SMOOTH,
-                        help = "The constant smooth parameter p passed to csaps().")
+                        help = "The constant smooth parameter p (smooth) passed to csaps(). Smaller p means more smoothing.")
     parser.add_argument("--peak-size", dest = "peaksize", type = int,
                         help = "The minimun peak size. Default is the maximum value between 'half of the --extsize' and '{}'.".format(PEAK_SIZE))
     parser.add_argument("--ipratio", dest = "ipratio", type = float,
                         default = IP_RATIO,
-                        help = "Only find the candidate peak within regions have the ratio of ip/input >= --ipratio.")
+                        help = "Define the candidate peaks within which regions have the ratio of ip/input >= --ipratio.")
     parser.add_argument("--center", dest = "center", type = float,
                         default = CENTER,
-                        help = "Center the candidate peak region by shearing points of which are less than --center of highest coverage. Should be the range [0, 0.5]")
+                        help = "Center the candidate peak region by shearing points of which are less than '--center' of highest coverage. Should be the range [0, 0.5]")
 
 def add_model_option ( parser ):
     parser.add_argument("--fit-type", dest = "fittype", type = str,
@@ -308,10 +305,10 @@ def add_diffpeak_parser( subparsers ):
     group_normalize = argparser_callpeak.add_argument_group( "Normalization options arguments" )
     add_normalize_option ( group_normalize )
     group_normalize.add_argument("--estip-eff", dest = "estipeff", type = str,
-                        choices = ['within', 'across'],
+                        choices = ['across', 'within'],
                         default = 'within',
                         help = "How estimate the IP efficiency factors of control and treated conditions. If 'within' is specified, it will estimate IP efficiency factors within each condition, repspectively. \
-                        If 'across' is specified, will estimate IP efficiency factors across 2 conditions.")
+                        If 'across' is specified, will estimate IP efficiency factors across 2 conditions (may introduce over-estimation).")
     ## group for constant options
     group_constant = argparser_callpeak.add_argument_group( "Constants arguments" )
     add_constant_option( group_constant)

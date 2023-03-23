@@ -39,7 +39,7 @@ def findMcSubGroup(options, subCovArr):
     else:
         return False
 
-def peakIpOverInput(options, peaks, ipCovArr, subCovArr, ipratio, meanCutoff):
+def peakIpOverInput(options, peaks, ipCovArr, subCovArr, signalRatio, meanCutoff):
     start, peak, end = peaks
     peakFlag = False
     ratio = 0
@@ -59,7 +59,7 @@ def peakIpOverInput(options, peaks, ipCovArr, subCovArr, ipratio, meanCutoff):
             ## determin the index of confident interval
             mcipCovArr = ipCovArr[smcIndex:emcIndex]
             if mcipCovArr.size >= options.peaksize:
-                ratio = ipratio
+                ratio = signalRatio
                 lMargin, rMargin = peakutils.centerPeak(options, mcipCovArr, ratio, meanCutoff)
                 ## final peak start and end
                 newStart = start + smcIndex + lMargin
@@ -123,9 +123,9 @@ def decodeFindpeaks(options, fpFitRes, ipCovArr, inputCovArr, ipMeanCov, offset,
         pipCovArr = ipCovArr[start:end]
         pinputCovArr = inputCovArr[start:end]
         psubCovArr = subCovArr[start:end]
-        ipratio = pipCovArr.sum() / (pinputCovArr.sum() + 1)
+        signalRatio = pipCovArr.sum() / (pinputCovArr.sum() + 1)
         ##peak with ip over input
-        refinePeaks, peakFlag = peakIpOverInput(options, peaks, pipCovArr, psubCovArr, ipratio, ipMeanCov)
+        refinePeaks, peakFlag = peakIpOverInput(options, peaks, pipCovArr, psubCovArr, signalRatio, ipMeanCov)
         if onipFlag is False:
             peakFlag = False
         peakIpCovSum = ipCovArr[refinePeaks[0]:refinePeaks[2]].sum()
@@ -148,11 +148,10 @@ def callPeakPerTx(bulkArgs):
     peakSiteList = []
     ## call on ip sample
     ## smooth the coverage data of tx
-    ipCovSmoothArr = functools.smoothCsaps(options, ipCovArr)
-    #ipCovSmoothArr = functools.smoothMove(ipCovArr, spanmethod, span=span, loop=spanloop)
+    ipSmoothCovArr = functools.smoothCsaps(options, ipCovArr)
     ## find peaks on smoothed coverage of tx, local maxima-minima
     fp = findpeaks(method='peakdetect', lookahead=options.lookahead, verbose=0)
-    fpFitRes = fp.fit(ipCovSmoothArr)
+    fpFitRes = fp.fit(ipSmoothCovArr)
     ## peakSiteList, [ [start, peak, end], ...]
     ipPeakSiteList, peakIpCovList, peakIpFlagList = decodeFindpeaks(options, fpFitRes, ipCovArr, inputCovArr, ipMeanCov, offset, onipFlag=True)
     if len(ipPeakSiteList):
@@ -161,15 +160,6 @@ def callPeakPerTx(bulkArgs):
             ## convert tx coordinates to genomic coordiates, peakBedRowList
             ## [ bed12Row + [peakFlag, peakIpCov], ...]
             peakSiteList = peakutils.peakToCorpeak(options, ipPeakSiteList, peakIpCovList, peakIpFlagList, txBed)
-    ## call on input sample
-    ##inputPeakSiteList = []
-    #inputCovSmoothArr = functools.smoothCsaps(options, inputCovArr)
-    #fp = findpeaks(method='peakdetect', lookahead=options.lookahead, verbose=0)
-    #fpFitRes = fp.fit(inputCovSmoothArr)
-    #inputPeakSiteList, peakInputCovList, peakInputFlagList = decodeFindpeaks(options, fpFitRes, inputCovArr, ipCovArr, inputMeanCov, onipFlag=False)
-    #if len(inputPeakSiteList):
-    #    if options.bedflag is True:
-    #        inputPeakSiteList = peakutils.peakToCorpeak(inputPeakSiteList, peakInputCovList, peakInputFlagList, txBed)
     return peakSiteList
 
 def callPeakPerTxBulkArgsCount(options, chromList, chromTxDict, txBedDict):
@@ -244,7 +234,7 @@ def runCallPeakPerTxParallel(options, bamList, chromTxDict, txBedDict):
         imapUnordered = pool.imap_unordered(callPeakPerTx, bulkArgsGenerator)
         if options.verbose >= 2:
             miniters = int(taskCount / 50)
-            barFormat = 'INFO @ Peak-calling status: {percentage:3.0f}% [elapsed: {elapsed}|estiamted remaining:{remaining}]\n'
+            barFormat = 'INFO  @ Peak-calling status: {percentage:3.0f}% [elapsed: {elapsed}|estiamted remaining:{remaining}]\n'
             for result in tqdm.tqdm(imapUnordered, total=taskCount, mininterval=60, maxinterval=120, miniters=miniters, position=0, leave=True, ascii=True, bar_format=barFormat):
                 if bool(result):
                     txPeakCallResultList.append(result)

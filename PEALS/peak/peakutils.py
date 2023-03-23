@@ -680,8 +680,16 @@ def centerPeak(options, dataArr, ratio, cutoff):
     ## Center the candidate peak region by shearing points of which are less than --center of highest coverage
     peaksize = options.peaksize
     if ratio > 0:
-        center = options.center * ( 1 + 1 / ratio )
+        if ratio < 1:
+             center = options.center * ( 1 + ratio )
+        else:
+            center = options.center * ( 1 + 1 / ratio )
     else:
+        center = options.center
+    ## make sure center percentage no more than 0.6
+    if center > 0.6:
+        center = 0.6
+    elif center < options.center:
         center = options.center
     ## define maximum shear margin
     dataSize = dataArr.size

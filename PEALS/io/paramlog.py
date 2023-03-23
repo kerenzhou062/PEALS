@@ -34,8 +34,8 @@ def log(options):
                     }
     peakParamDict = {'txsizemax':'split', 'spanmethod':'span-method', 'span':'span', \
                     'spanloop':'span-loop', 'comprate':'complexity-rate', 'lookahead':'lookahead', \
-                    'csapsp':'csaps-p', 'peaksize':'peak-size', 'ipratio':'ipratio', \
-                    'center':'center', \
+                    'csapsp':'csaps-p', 'csapsnor':'csaps-normalize', 'peaksize':'peak-size', \
+                    'ipratio':'ipratio', 'center':'center', \
                     }
     modelParamDict = {'fittype':'fit-type', 'shrink':'shrink', 'test':'test', \
                     'formula':'formula', \
@@ -63,5 +63,5 @@ def log(options):
             param = paramDict[param]
             glueList.append(glue(param, value))
         glueVal = ', '.join(glueList)
-        report = '[{}] parameter group:{}'.format(groupName, glueVal)
+        report = '[{}] parameter group: {}'.format(groupName, glueVal)
         logging.info(report)
