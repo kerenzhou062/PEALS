@@ -255,6 +255,7 @@ def validateCallpeakArgs(options):
     options.binaryapp = BINARY_APPENDIX
     options.labelref = REF_PEAK_LABEL
     options.txoptsize = int(options.txsizemax * 0.2)
+    options.spandict = SPAN_DICT
     options.version = VERSION
     ## construct peak regex
     peakidsep = options.idsepdict['peakid'].replace('|', '\\|')
@@ -304,6 +305,7 @@ def validateDiffpeakArgs(options):
     options.binaryapp = BINARY_APPENDIX
     options.labelref = REF_PEAK_LABEL
     options.txoptsize = int(options.txsizemax * 0.3)
+    options.spandict = SPAN_DICT
     options.version = VERSION
     ## construct peak regex
     peakidsep = options.idsepdict['peakid'].replace('|', '\\|')

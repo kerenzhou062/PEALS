@@ -532,8 +532,11 @@ def smoothMove(valueList, method, span=10, loop=1, backward=False):
 def smoothCsaps(options, npArr):
     spanmethod = options.spanmethod
     csapsp = options.csapsp
+    maxSpan = options.spandict['max']
+    minSpan = options.spandict['min']
+    spanStep = options.spandict['step']
     ## make span not exceed array length
-    optSpan = max(2, int(npArr.size / 80))
+    optSpan = min(maxSpan, max(minSpan, int(npArr.size / spanStep)))
     indexArr = np.arange(npArr.size)
     ## estimate weights for each point
     weights = preprocessing.normalize([npArr], norm="l2")[0]
