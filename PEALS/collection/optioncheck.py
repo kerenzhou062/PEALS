@@ -71,8 +71,8 @@ def checkSplitSize(options):
     ## Value for split a transcript
     if options.txsizemax < 5000:
         options.txsizemax = 5000
-    elif options.txsizemax > 100000:
-        options.txsizemax = 100000
+    elif options.txsizemax > 50000:
+        options.txsizemax = 50000
     return options
 
 def checkVerbose(options):

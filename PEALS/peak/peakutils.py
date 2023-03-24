@@ -681,7 +681,7 @@ def centerPeak(options, dataArr, ratio, cutoff):
     peaksize = options.peaksize
     if ratio > 0:
         if ratio < 1:
-             center = options.center * ( 1 + ratio )
+            center = options.center * ( 1 + ratio )
         else:
             center = options.center * ( 1 + 1 / ratio )
     else:
