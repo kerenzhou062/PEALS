@@ -6,9 +6,15 @@ description of command-line options. Here we only list the essentials.
 
 ## Input Options
 
+### `-m`/`--matrix FILENAME`
+
+The tab-separated matrix contain all information of input samples. Header format:`label,library,condition,sample,replicate,bam,binary,...`.
+
+Please chek an example [peals.callpeak.sample.txt](https://github.com/kerenzhou062/PEALS/example/peals.callpeak.sample.txt) here as reference.
+
 ### `-i`/`--input DIRECTORY`
 
-This is the requred argument for the directory that contains all bam files that listed in your input `<sample matrix>`.
+This is the requred argument for the directory that contains all bam files that listed in your input `--matrix <sample matrix>`.
 
 ### `-c`/`--control`
 
