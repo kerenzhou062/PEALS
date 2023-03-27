@@ -5,21 +5,17 @@ Please check the following instructions to complete your installation.
 
 ## Prerequisites
 
-### Python3
+PEALS is developed under `python3` environment and has been tested in `python 3.8` and `Linux` with kernel-version `#1 SMP Mon Dec 4 23:52:40 UTC 2017`.
 
-PEALS requires Python3. We have tested PEALS in Python3.8. 
+Please be sure that the following software or R packages have been properly installed and are available in `PATH` variable.
 
-### NumPy
-
-PEALS requires [Numpy](http://www.scipy.org/Download) (>=1.21.2).
-
-### NumPy
-
-PEALS requires [scipy](http://www.scipy.org/Download) (>=1.7.1).
-
-### CSAPS
-
-PEALS requires [CSAPS](https://csaps.readthedocs.io/en/latest/) (>=1.1.0).
+ * [bedTools (>=2.30.0)](https://bedtools.readthedocs.io/en/latest/content/installation.html)
+ * [samtools (>=1.14)](http://www.htslib.org/download/)
+ * [featureCounts (>=2.0.2)](https://subread.sourceforge.net/featureCounts.html)
+ * [DESeq2 (>=1.32.0)](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
+ * [ggplot2 (>=3.4.1)](https://ggplot2.tidyverse.org/index.html)
+ * [ashr (>=2.2.54)](https://github.com/stephens999/ashr)
+ * [apeglm (>=1.14.0)](https://bioconductor.org/packages/release/bioc/html/apeglm.html)
 
 ### findpeaks
 
@@ -62,7 +58,6 @@ python3 setup.py install --user
 ```
 
 ### PYTHONPATH
-
 To set up your `PYTHONPATH` environment variable, you'll need to add
 the value `PREFIX/lib/pythonX.Y/site-packages` to your existing
 `PYTHONPATH`. In this value, X.Y stands for the major–minor version of
@@ -77,15 +72,3 @@ adding this line to my `~/.bashrc`::
 
  `$ export
  PYTHONPATH=/home/kzhou/lib/python3.8/site-packages:$PYTHONPATH`
-
-### PATH
-
-Please be sure that the following software or R packages have been properly installed and are available in `PATH` variable.
-
- * [bedTools (>=2.30.0)](https://bedtools.readthedocs.io/en/latest/content/installation.html)
- * [samtools (>=1.14)](http://www.htslib.org/download/)
- * [featureCounts (>=2.0.2)](https://subread.sourceforge.net/featureCounts.html)
- * [DESeq2 (>=1.32.0)](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
- * [ggplot2 (>=3.4.1)](https://ggplot2.tidyverse.org/index.html)
- * [ashr (>=2.2.54)](https://github.com/stephens999/ashr)
- * [apeglm (>=1.14.0)](https://bioconductor.org/packages/release/bioc/html/apeglm.html)
