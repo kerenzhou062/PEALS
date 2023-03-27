@@ -38,7 +38,7 @@ pip3 install . --user
 
 ```
 
-### Install from source using `setup.py`.
+### Install from source using `setup.py`
 
 ```bash
 git clone https://github.com/kerenzhou062/PEALS.git
