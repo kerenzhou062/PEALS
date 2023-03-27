@@ -10,7 +10,7 @@ description of command-line options. Here we only list the essentials.
 
 The tab-separated matrix contain all information of input samples. Header format:`label,library,condition,sample,replicate,bam,binary,...`.
 
-Please chek an example [sample matrix](https://github.com/kerenzhou062/PEALS/example/peals.diffpeak.sample.txt) here as reference.
+Please chek an example [sample matrix](https://github.com/kerenzhou062/PEALS/blob/main/example/peals.diffpeak.sample.txt) here as reference.
 
 ### `-i`/`--input DIRECTORY`
 
