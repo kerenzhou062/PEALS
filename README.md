@@ -36,13 +36,13 @@ Please check [INSTALL](./docs/INSTALL.md) document for detail.
 
 Example for regular peak calling on MeRIP-seq.
 
-For sample matrix, please chek the [peals.callpeak.sample.txt](./example/peals.callpeak.sample.txt) here as reference.
+For sample matrix, please chek the [sample matrix](./example/peals.callpeak.sample.txt) here as reference.
 
 `peals callpeak -i <bam directory> -m <sample matrix> -P <prefix> -o <output directory>`
 
 Example for differentially methylated peak calling on MeRIP-seq.
 
-For sample matrix, please chek the [peals.diffpeak.sample.txt](./example/peals.diffpeak.sample.txt) here as reference.
+For sample matrix, please chek the [sample matrix](./example/peals.diffpeak.sample.txt) here as reference.
 
 `peals diffpeak -i <bam directory> -m <sample matrix> -P <prefix> -o <output directory>`
 

@@ -119,7 +119,7 @@ def run( args ):
         binaryFileList = sorted(options.matrixdf.loc[bamidList, ]['binary'].unique())
         binaryFileForLog = ','.join(map(lambda x: os.path.basename(x), binaryFileList))
         info( READ_BINARY_LOG.format(binaryFileForLog) )
-        peakRowList = streamtools.readPeakFromMbb(binaryFileList, bufferSize=options.buffer, folder=None)
+        peakRowList = streamtools.readPeakFromMbb(binaryFileList, bufferSize=options.buffer, folder=options.binarydir)
     ## info
     info("Starting to call peaks on IP and input libraries...")
     for i in range(len(pairBamList3d)):
@@ -132,10 +132,12 @@ def run( args ):
         info( CALL_PEAK_LOG.format(ipBamName, inputBamName) )
         ### running code
         perPeakRowList = peakcall.callPeak(options, txBedDict, subTxExpDf, bamList, label)
-        ## write peakRowList to binary file *.mbb
+        ''' just used for development
+        ## write peakRowList to binary file *.pb
         if label != options.labelref:
             binaryFile = functools.getCellByBam(options, subIpBamList[0], 'binary')
             pickle.dump( perPeakRowList, open(binaryFile, "wb") )
+        '''
         ## append peakRowList
         peakRowList.extend(perPeakRowList)
         ## info
@@ -153,11 +155,6 @@ def run( args ):
         testResDf = peaktest.runNbinomTest(options, peakReadCountDf)
         info("Statistical testing on peak candidates done.")
     else:
-        ### testing code
-        ####binaryFile = os.path.join(options.outputdir, 'pool_ref' + options.binaryapp)
-        ####pickle.dump( peakRowList, open(binaryFile, "wb") )
-        ####peakRowList = streamtools.readPeakFromMbb([binaryFile], bufferSize=options.buffer, folder=None)
-        ####streamtools.peakToFile(peakRowList, 'pool_ref.bed', bed12=False, folder=options.outputdir)
         ## info
         info("Finding consensus peak candidates from replicates...")
         ## running peak pooling

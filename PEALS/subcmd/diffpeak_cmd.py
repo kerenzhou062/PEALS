@@ -115,8 +115,10 @@ def run( args ):
         treatPeakRowList = findPeakFromSample(options, txBedDict, tipBamList, tinputBamList, tlabelList, geneExpDf, subTxExpDf, 'treated')
         info( "Merging peak candidates from control and treated conditions..." )
         peakRowList = controlPeakRowList + treatPeakRowList
+        ''' just used for development
         ### for reuse
         streamtools.dumpPeakToMbb(peakRowList, 'combine.peak.mbb', folder=options.outputdir)
+        '''
     else:
         ## info
         info("Reading \"combine.peak.mbb\" instead of calling peaks!")
@@ -224,7 +226,7 @@ def findPeakFromSample(options, txBedDict, ipBamList, inputBamList, labelList, g
         binaryFileList = sorted(options.matrixdf.loc[bamidList, ]['binary'].unique())
         binaryFileForLog = ','.join(map(lambda x: os.path.basename(x), binaryFileList))
         info( READ_BINARY_LOG.format(binaryFileForLog) )
-        peakRowList = streamtools.readPeakFromMbb(binaryFileList, bufferSize=options.buffer, folder=None)
+        peakRowList = streamtools.readPeakFromMbb(binaryFileList, bufferSize=options.buffer, folder=options.binarydir)
     ## info
     info("Starting to call peaks on IP and input libraries...")
     for i in range(len(pairBamList3d)):
@@ -237,10 +239,12 @@ def findPeakFromSample(options, txBedDict, ipBamList, inputBamList, labelList, g
         info( CALL_PEAK_LOG.format(ipBamName, inputBamName) )
         ### running code
         perPeakRowList = peakcall.callPeak(options, txBedDict, txExpDf, bamList, label)
+        ''' just used for development
         ## write peakRowList to binary file *.mbb
         if label != options.labelref:
             binaryFile = functools.getCellByBam(options, subIpBamList[0], 'binary')
             pickle.dump( perPeakRowList, open(binaryFile, "wb") )
+        '''
         ## append peakRowList
         peakRowList.extend(perPeakRowList)
         ## info

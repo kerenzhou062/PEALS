@@ -531,6 +531,7 @@ def smoothMove(valueList, method, span=10, loop=1, backward=False):
 
 def smoothCsaps(options, npArr):
     spanmethod = options.spanmethod
+    spanloop = options.spanloop
     csapsp = options.csapsp
     maxSpan = options.spandict['max']
     minSpan = options.spandict['min']
@@ -546,7 +547,7 @@ def smoothCsaps(options, npArr):
     try:
         csapsSmoothArr = csaps(indexArr, npArr, indexArr, weights=weights, smooth=smooth)
         ## smooth again with move average
-        npSmoothArr = smoothMove(csapsSmoothArr, 'move', span=optSpan, loop=1, backward=True)
+        npSmoothArr = smoothMove(csapsSmoothArr, 'move', span=optSpan, loop=spanloop, backward=True)
     except RuntimeError as e:
         npSmoothArr = smoothMove(npArr, 'move', span=optSpan, loop=3, backward=True)
     return npSmoothArr

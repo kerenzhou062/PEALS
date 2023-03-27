@@ -23,7 +23,6 @@ THIRD_PARTY_SOFTWARE = {'bedtools':['bash', '2.30.0'], \
                         'DESeq2':['R', '1.32.0'], \
                         'ashr':['R', '2.2.54'], \
                         'apeglm':['R', '1.14.0'], \
-                        'glmGamPoi':['R', '1.4.0'],
                         'ggplot2':['R', '3.4.1'],}
 #identifier
 ID_SEP_DICT={'labeltxid':'#=',\

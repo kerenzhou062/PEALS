@@ -249,9 +249,13 @@ def validateCallpeakArgs(options):
     chekFolder(options.outputdir, 'cwd', 'output')
     # determin temdir
     chekFolder(options.tempdir, options.outputdir, 'temp')
+    # determin binarydir
+    chekFolder(options.binarydir, options.outputdir, 'binary')
     ## constant
     options.idsepdict = ID_SEP_DICT
     options.tempre = TEMP_PREFIX
+    options.reuse = False
+    options.binary = False
     options.binaryapp = BINARY_APPENDIX
     options.labelref = REF_PEAK_LABEL
     options.txoptsize = int(options.txsizemax * 0.2)
@@ -299,9 +303,13 @@ def validateDiffpeakArgs(options):
     chekFolder(options.outputdir, 'cwd', 'output')
     # determin temdir
     chekFolder(options.tempdir, options.outputdir, 'temp')
+    # determin binarydir
+    chekFolder(options.binarydir, options.outputdir, 'binary')
     ## constant
     options.idsepdict = ID_SEP_DICT
     options.tempre = TEMP_PREFIX
+    options.reuse = False
+    options.binary = False
     options.binaryapp = BINARY_APPENDIX
     options.labelref = REF_PEAK_LABEL
     options.txoptsize = int(options.txsizemax * 0.3)
