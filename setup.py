@@ -70,7 +70,7 @@ def main():
            url = 'http://github.com/kerenzhou062/PEALS/',
            package_dir = {'PEALS' : 'PEALS'},
            packages = ['PEALS', 'PEALS.io', 'PEALS.collection', 'PEALS.peak', 'PEALS.stats', 'PEALS.subcmd'],
-           package_data = {'PEALS.stats':['*.R']},
+           package_data = {'PEALS.stats':['*.R'], 'docs':['*.md'], 'example':['*.txt'], },
            scripts = ['bin/peals', ],
            classifiers = classifiers,
            install_requires = installRequires,

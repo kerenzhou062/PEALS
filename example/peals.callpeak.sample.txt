@@ -1,5 +1,5 @@
-id	library	condition	replicate	label	bam	binary
-HepG2_control_input_rep1	input	control	1	HepG2_control_rep1	HepG2_control_input_rep1.genome.sorted.bam	HepG2_control_rep1.pb
-HepG2_control_input_rep2	input	control	2	HepG2_control_rep2	HepG2_control_input_rep2.genome.sorted.bam	HepG2_control_rep2.pb
-HepG2_control_IP_rep1	ip	control	1	HepG2_control_rep1	HepG2_control_IP_rep1.genome.sorted.bam	HepG2_control_rep1.pb
-HepG2_control_IP_rep2	ip	control	2	HepG2_control_rep2	HepG2_control_IP_rep2.genome.sorted.bam	HepG2_control_rep2.pb
+id	library	condition	replicate	label	bam
+HepG2_control_input_rep1	input	control	1	HepG2_control_rep1	HepG2_control_input_rep1.genome.sorted.bam
+HepG2_control_input_rep2	input	control	2	HepG2_control_rep2	HepG2_control_input_rep2.genome.sorted.bam
+HepG2_control_IP_rep1	ip	control	1	HepG2_control_rep1	HepG2_control_IP_rep1.genome.sorted.bam
+HepG2_control_IP_rep2	ip	control	2	HepG2_control_rep2	HepG2_control_IP_rep2.genome.sorted.bam
