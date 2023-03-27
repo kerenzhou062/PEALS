@@ -7,7 +7,7 @@ Please check the following instructions to complete your installation.
 
 PEALS is developed under `python3` environment and has been tested in `python 3.8` and `Linux` with kernel-version `#1 SMP Mon Dec 4 23:52:40 UTC 2017`.
 
-Please be sure that the following software or R packages have been properly installed and are available in `PATH` variable or can be loaded by `R`.
+Please be sure that the following software or R packages have been properly installed and are available in `PATH` variable or can be directly loaded by `R`.
 
  * [bedTools (>=2.30.0)](https://bedtools.readthedocs.io/en/latest/content/installation.html)
  * [samtools (>=1.14)](http://www.htslib.org/download/)
@@ -16,10 +16,6 @@ Please be sure that the following software or R packages have been properly inst
  * [ggplot2 (>=3.4.1)](https://ggplot2.tidyverse.org/index.html)
  * [ashr (>=2.2.54)](https://github.com/stephens999/ashr)
  * [apeglm (>=1.14.0)](https://bioconductor.org/packages/release/bioc/html/apeglm.html)
-
-### findpeaks
-
-PEALS requires [findpeaks](https://erdogant.github.io/findpeaks/pages/html/Installation.html#installation) (>=2.4.6).
 
 ## 3 ways to install PEALS
 
