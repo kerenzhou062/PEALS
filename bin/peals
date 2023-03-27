@@ -45,7 +45,7 @@ def prepare_argparser ():
     epilog = "For command line options of each command, type: %(prog)s COMMAND -h"
     # top-level parser
     argparser = ap.ArgumentParser( description = description, epilog = epilog ) #, usage = usage )
-    argparser.add_argument("--version", dest = "version", action="version", version="%(prog)s v"+ VERSION)
+    argparser.add_argument("-v", "--version", dest = "version", action="version", version="%(prog)s v"+ VERSION)
     subparsers = argparser.add_subparsers( dest = 'subcommand' ) #help="sub-command help")
     subparsers.required = True
 

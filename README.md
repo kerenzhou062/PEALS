@@ -19,20 +19,27 @@ PEALS relies on the following third party software. Before installing PEALS, ple
  * [featureCounts (>=2.0.2)](https://subread.sourceforge.net/featureCounts.html)
  * [DESeq2 (>=1.32.0)](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
  * [ggplot2 (>=3.4.1)](https://ggplot2.tidyverse.org/index.html)
+ * [ashr (>=2.2.54)](https://github.com/stephens999/ashr)
+ * [apeglm (>=1.14.0)](https://bioconductor.org/packages/release/bioc/html/apeglm.html)
 
 ## Install
 
 The common way to install PEALS is through
-[PYPI](https://pypi.org/project/peals/)) or
-[INSTALL](./docs/INSTALL.md) document for detail.
+[PYPI](https://pypi.org/project/peals/)).
+
+Please check [INSTALL](./docs/INSTALL.md) document for detail.
 
 ## Usage
 
-Example for regular peak calling on MeRIP-seq:
+Example for regular peak calling on MeRIP-seq.
+
+For sample matrix, please chek the [peals.callpeak.sample.txt](./example/peals.callpeak.sample.txt) here as reference.
 
 `peals callpeak -i <bam directory> -m <sample matrix> -P <prefix> -o <output directory>`
 
-Example for differentially methylated peak calling on MeRIP-seq:
+Example for differentially methylated peak calling on MeRIP-seq.
+
+For sample matrix, please chek the [peals.diffpeak.sample.txt](./example/peals.diffpeak.sample.txt) here as reference.
 
 `peals diffpeak -i <bam directory> -m <sample matrix> -P <prefix> -o <output directory>`
 
@@ -42,16 +49,8 @@ Subcommand | Description
 [`callpeak`](./docs/callpeak.md) | Main function to call peaks from alignment results.
 [`diffpeak`](./docs/diffpeak.md) | Main function to call differentially methylated peaks from alignment results.
 
-For advanced usage, for example, to run `peals` in a modular way,
-please read the [advanced usage](./docs/advanced_usage.md). There is a
-[Q&A](./docs/qa.md) document where we collected some common questions
-from users.
-
 ## Contribute
-
-Please read our [CODE OF CONDUCT](./CODE_OF_CONDUCT.md) and
-[How to contribute](./CONTRIBUTING.md) documents. If you have any
-questions, suggestion/ideas, or just want to have conversions with
+If you have any questions, suggestion/ideas, or just want to have conversions with
 developers and other users in the community, we recommand you use the
 [PEALS Discussions](https://github.com/peals-project/PEALS/discussions)
 instead of posting to our

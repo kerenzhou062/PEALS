@@ -7,151 +7,85 @@ Please check the following instructions to complete your installation.
 
 ### Python3
 
-PEALS requires Python3. We have tested MACS in Python3.6, 3.7 and 3.8. 
+PEALS requires Python3. We have tested PEALS in Python3.8. 
 
 ### NumPy
 
-MACS also requires [Numpy](http://www.scipy.org/Download) (>=1.17).
+PEALS requires [Numpy](http://www.scipy.org/Download) (>=1.21.2).
 
-### Cython
+### NumPy
 
-[Cython](http://cython.org/) is required to translate .pyx codes to .c
-code. The version of Cython has to be >=0.29.
+PEALS requires [scipy](http://www.scipy.org/Download) (>=1.7.1).
 
-### cykhash
+### CSAPS
 
-[cykhash](https://github.com/realead/cykhash) is a fast and efficient
-hash implementation in Cython. It is used to replace python dictionary
-in PEALS codes. Since it requires Cython, make sure you install Cython
-first, then install cykhash. 
+PEALS requires [CSAPS](https://csaps.readthedocs.io/en/latest/) (>=1.1.0).
 
-### fermi-lite and simde
+### findpeaks
 
-A newly added `callvar` subcommand in PEALS uses
-[fermi-lite](https://github.com/lh3/fermi-lite) to assemble the DNA
-sequence in a peak region while necessary. A modified fermi-lite has
-been included in PEALS package. Since fermi-lite was implemented using
-intel SSE2 intrinsics for x86 CPUs, we added
-[simde](https://github.com/simd-everywhere/simde) as submodule to
-solve the compatibility issues on non-x86 architectures. Note that, we
-may remove this submodule and add simde in *dependencies* of PEALS
-later.
-
-### GCC and Python-dev 
-
-GCC is required to compile `.c` codes in MACS v3 package, and python 
-header files are needed. If you are using Mac OSX, I recommend you 
-install Xcode; if you are using Linux, you need to make sure 
-`python-dev` package is installed -- the actual package name depends 
-on the Linux OS distribution, you are using. 
-
-
-## Prepare a virtual Python environment 
-
-We strongly recommend installing your MACS program in a virtual
-environment, so that you have full control of your installation and
-won't mess up with your system libraries. To learn about virtual
-environment, read [this
-article](https://docs.python.org/3/library/venv.html). A simple way to
-create a virtual environment of Python3 is
-
-`$ python3 -m venv MyPythonEnv/`
-
-Then activate it by
-
-`$ source MyPythonEnv/bin/activate`
+PEALS requires [findpeaks](https://erdogant.github.io/findpeaks/pages/html/Installation.html#installation) (>=2.4.6).
 
 ## Install through PyPI
 
-The easiest way to install MACS is through PyPI system. Get `pip` if
-it's not available in your system. If you create a virtual environment
-as described before, your `pip` command will install everything under
-the folder you specified previously through `python3 -m env` command.
+The easiest way to install PEALS is through PyPI system. Get `pip` if
+it's not available in your system.
 
-Then under the command line, type `pip install PEALS`. PyPI will
-install Numpy automatically if it is absent.
+```bash
+pip3 install peals --user
 
-To upgrade PEALS, type `pip install --upgrade PEALS`. It will check
-currently installed PEALS, compare the version with the one on PyPI
-repository, download and install a newer version while necessary.
-
-If you plan to install MACS in your own user directory, use `pip
-install PEALS --user`.
+```
 
 ## Install from source
 
-MACS uses Python's [setuptools](https://setuptools.readthedocs.io) for
-source code installations. To install a source distribution of MACS,
-unpack the distribution tarball, or clone Git repository with `git
-clone --recurse-submodules git@github.com:taoliu/MACS.git`. Go to the directory where you
-unpacked MACS, and simply run the install script:
+There are 2 ways to install PEALS from source.
 
- `$ python setup.py install`
+The 1st way is using `pip` command.
 
-By default, the script will install python library and executable
-codes according to the environment. When you run the command under
-virtualenv, the script will install to the virtual environment
-instead. When you run it without virtual environment, you may need to
-be root or administrator of the machine so as to complete the
-installation. Please contact the system administrator if you want
-their help. If you need to provide a nonstandard install prefix, or
-any other nonstandard options, you can provide many command line
-options to the install script. Use the `--help` option to see a brief
-list of available options:
+```bash
+git clone https://github.com/kerenzhou062/PEALS.git
 
- `$ python setup.py --help`
+cd PEALS
 
-For example, if I want to install everything under my own HOME
-directory, use this command:
+pip3 install . --user
 
- `$ python setup.py install --prefix /home/myaccount/`
+```
 
-As mentioned in *Prerequisites*, you don't need to install Cython in
-order to install MACS. When Cython is available, this setup script
-will regenerate C codes from Pyx codes when necessary. When Cython is
-not available, this setup script will just use the C codes included in
-the release package (or your Github clone) for installation.
+The 2nd way is using `setup.py`.
 
-## Configure environment variables
+```bash
+git clone https://github.com/kerenzhou062/PEALS.git
 
-*Note*, if you are using a virtual environment, you should skip this
-section since all the corresponding environment variables have been
-correctly set while you `activate` the environment.
+cd PEALS
 
-After running the setup script, you might need to add the install
-location to your `PYTHONPATH` and `PATH` environment variables. The
-process for doing this varies on each platform, but the general
-concept is the same across platforms.
+python3 setup.py install --user
+
+```
 
 ### PYTHONPATH
 
 To set up your `PYTHONPATH` environment variable, you'll need to add
 the value `PREFIX/lib/pythonX.Y/site-packages` to your existing
 `PYTHONPATH`. In this value, X.Y stands for the major–minor version of
-Python you are using (such as 3.7; you can find this with
+Python you are using (such as 3.8; you can find this with
 `sys.version[:3]` from a Python command line). `PREFIX` is the install
-prefix where you installed MACS. If you did not specify a prefix on
-the command line, MACS will be installed using Python's sys.prefix
+prefix where you installed PEALS. If you did not specify a prefix on
+the command line, PEALS will be installed using Python's sys.prefix
 value.
 
 On Linux, using bash, I include the new value in my `PYTHONPATH` by
 adding this line to my `~/.bashrc`::
 
  `$ export
- PYTHONPATH=/home/taoliu/lib/python3.7/site-packages:$PYTHONPATH`
-
-Using Windows, you need to open up the system properties dialog and
-locate the tab labeled Environment. Add your value to the `PYTHONPATH`
-variable, or create a new `PYTHONPATH` variable if there isn't one
-already.
+ PYTHONPATH=/home/kzhou/lib/python3.8/site-packages:$PYTHONPATH`
 
 ### PATH
 
-Just like your `PYTHONPATH`, you'll also need to add a new value to
-your PATH environment variable so that you can use the MACS command
-line directly. Unlike the `PYTHONPATH` value, however, this time
-you'll need to add `PREFIX/bin` to your PATH environment variable. The
-process for updating this is the same as described above for the
-`PYTHONPATH` variable::
+Please be sure that the following software or R packages have been properly installed and are available in `PATH` variable.
 
- `$ export PATH=/home/myaccount/bin:$PATH`
+ * [bedTools (>=2.30.0)](https://bedtools.readthedocs.io/en/latest/content/installation.html)
+ * [samtools (>=1.14)](http://www.htslib.org/download/)
+ * [featureCounts (>=2.0.2)](https://subread.sourceforge.net/featureCounts.html)
+ * [DESeq2 (>=1.32.0)](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
+ * [ggplot2 (>=3.4.1)](https://ggplot2.tidyverse.org/index.html)
+ * [ashr (>=2.2.54)](https://github.com/stephens999/ashr)
+ * [apeglm (>=1.14.0)](https://bioconductor.org/packages/release/bioc/html/apeglm.html)
