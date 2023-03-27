@@ -247,6 +247,7 @@ def validateCallpeakArgs(options):
     options.reuse = False
     options.binary = False
     options.binaryapp = BINARY_APPENDIX
+    options.binarydir = None
     ## check sample matrix
     checkMatrixFile(options)
     # determin outputdir
@@ -302,6 +303,7 @@ def validateDiffpeakArgs(options):
     options.reuse = False
     options.binary = False
     options.binaryapp = BINARY_APPENDIX
+    options.binarydir = None
     ## check sample matrix
     checkMatrixFile(options)
     # determin outputdir
