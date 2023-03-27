@@ -243,6 +243,10 @@ def validateCallpeakArgs(options):
     options.warn  = logging.warning
     options.debug = logging.debug
     options.info  = logging.info
+    ## binary
+    options.reuse = False
+    options.binary = False
+    options.binaryapp = BINARY_APPENDIX
     ## check sample matrix
     checkMatrixFile(options)
     # determin outputdir
@@ -254,9 +258,6 @@ def validateCallpeakArgs(options):
     ## constant
     options.idsepdict = ID_SEP_DICT
     options.tempre = TEMP_PREFIX
-    options.reuse = False
-    options.binary = False
-    options.binaryapp = BINARY_APPENDIX
     options.labelref = REF_PEAK_LABEL
     options.txoptsize = int(options.txsizemax * 0.2)
     options.spandict = SPAN_DICT
@@ -297,6 +298,10 @@ def validateDiffpeakArgs(options):
     options.warn  = logging.warning
     options.debug = logging.debug
     options.info  = logging.info
+    ## binary
+    options.reuse = False
+    options.binary = False
+    options.binaryapp = BINARY_APPENDIX
     ## check sample matrix
     checkMatrixFile(options)
     # determin outputdir
@@ -308,9 +313,6 @@ def validateDiffpeakArgs(options):
     ## constant
     options.idsepdict = ID_SEP_DICT
     options.tempre = TEMP_PREFIX
-    options.reuse = False
-    options.binary = False
-    options.binaryapp = BINARY_APPENDIX
     options.labelref = REF_PEAK_LABEL
     options.txoptsize = int(options.txsizemax * 0.3)
     options.spandict = SPAN_DICT
