@@ -8,7 +8,7 @@ description of command-line options. Here we only list the essentials.
 
 ### `-i`/`--input DIRECTORY`
 
-This is the requred argument for the directory that contains all bam files that listed in your input <sample matrix>.
+This is the requred argument for the directory that contains all bam files that listed in your input `<sample matrix>`.
 
 ### `-c`/`--control`
 
