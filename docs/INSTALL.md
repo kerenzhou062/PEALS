@@ -47,7 +47,7 @@ python3 setup.py install --user
 
 ```
 
-### PYTHONPATH
+## PYTHONPATH
 To set up your `PYTHONPATH` environment variable, you'll need to add
 the value `PREFIX/lib/pythonX.Y/site-packages` to your existing
 `PYTHONPATH`. In this value, X.Y stands for the major–minor version of
