@@ -7,7 +7,7 @@ Please check the following instructions to complete your installation.
 
 PEALS is developed under `python3` environment and has been tested in `python 3.8` and `Linux` with kernel-version `#1 SMP Mon Dec 4 23:52:40 UTC 2017`.
 
-Please be sure that the following software or R packages have been properly installed and are available in `PATH` variable.
+Please be sure that the following software or R packages have been properly installed and are available in `PATH` variable or can be loaded by `R`.
 
  * [bedTools (>=2.30.0)](https://bedtools.readthedocs.io/en/latest/content/installation.html)
  * [samtools (>=1.14)](http://www.htslib.org/download/)
@@ -21,7 +21,9 @@ Please be sure that the following software or R packages have been properly inst
 
 PEALS requires [findpeaks](https://erdogant.github.io/findpeaks/pages/html/Installation.html#installation) (>=2.4.6).
 
-## Install through PyPI
+## 3 ways to install PEALS
+
+### Install through PyPI
 
 The easiest way to install PEALS is through PyPI system. Get `pip` if
 it's not available in your system.
@@ -31,28 +33,20 @@ pip3 install peals --user
 
 ```
 
-## Install from source
-
-There are 2 ways to install PEALS from source.
-
-The 1st way is using `pip` command.
+### Install from source using `pip`
 
 ```bash
 git clone https://github.com/kerenzhou062/PEALS.git
-
 cd PEALS
-
 pip3 install . --user
 
 ```
 
-The 2nd way is using `setup.py`.
+### Install from source using `setup.py`.
 
 ```bash
 git clone https://github.com/kerenzhou062/PEALS.git
-
 cd PEALS
-
 python3 setup.py install --user
 
 ```
