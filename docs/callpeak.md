@@ -4,14 +4,11 @@ This is the main function in PEALS. It can be invoked by `PEALS
 callpeak` . If you type this command with `-h`, you will see a full
 description of command-line options. Here we only list the essentials.
 
-## Essential Options
+## Input Options
 
-### `-t`/`--treatment FILENAME`
+### `-i`/`--input DIRECTORY`
 
-This is the only REQUIRED parameter for MACS. The file can be in any
-supported format -- see detail in the `--format` option. If you have
-more than one alignment file, you can specify them as `-t A B C`. MACS
-will pool up all these files together.
+This is the requred argument for the directory that contains all bam files that listed in your input <sample matrix>.
 
 ### `-c`/`--control`
 
