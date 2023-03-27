@@ -48,12 +48,17 @@ python3 setup.py install --user
 ```
 
 ## PYTHONPATH
+Usually, you don't need to care about the `PYTHONPATH` enrivonment 
+unless you install PEALS to a specific path.
+
 To set up your `PYTHONPATH` environment variable, you'll need to add
 the value `PREFIX/lib/pythonX.Y/site-packages` to your existing
 `PYTHONPATH`. In this value, X.Y stands for the major–minor version of
 Python you are using (such as 3.8; you can find this with
 `sys.version[:3]` from a Python command line). `PREFIX` is the install
-prefix where you installed PEALS. If you did not specify a prefix on
+prefix where you installed PEALS.
+
+If you did not specify a prefix on
 the command line, PEALS will be installed using Python's sys.prefix
 value.
 
