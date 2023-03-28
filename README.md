@@ -54,9 +54,7 @@ Subcommand | Description
 
 ## Contribute
 If you have any questions, suggestion/ideas, or just want to have conversions with
-developers and other users in the community, we recommand you use the
-[PEALS Discussions](https://github.com/kerenzhou062/PEALS/discussions)
-instead of posting to our
+developers and other users in the community, we recommand you posting to our
 [Issues](https://github.com/kerenzhou062/PEALS/issues) page.
 
 ## Ackowledgement
