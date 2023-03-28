@@ -57,11 +57,14 @@ def runNbinomTest(options, peakReadCountDf):
     ## perform fdr corrections
     alpha = 0.05
     ## transfer 'BH' to 'padjmethod'
-    if options.padjmethod == 'BH':
-        padjmethod = 'BH'
-    else:
-        padjmethod = 'BY'
-    fdrArr = statstools.fdr_correction(mpmath.mpf(10) ** log10PvalArr, alpha=alpha, method=padjmethod)[1]
+    #if options.padjmethod == 'BH':
+    #    padjmethod = 'BH'
+    #else:
+    #    padjmethod = 'none'
+    #fdrArr = statstools.fdr_correction(mpmath.mpf(10) ** log10PvalArr, alpha=alpha, method=padjmethod)[1]
+    # use R to calculate the adjusted P-value
+    pvalArr = mpmath.mpf(10) ** log10PvalArr
+    fdrArr = np.array(robjects.r['p.adjust'](robjects.FloatVector(pvalArr), method = options.padjmethod))
     log10FdrArr = np.array([mpmath.log10(fdr) for fdr in fdrArr])
     ## example results
     ## array([-7.69204611e-02, -4.06128956e-02, -7.69204611e-02, ...,  -7.69204611e-02, -1.55633270e-01, -3.35241642e-06])

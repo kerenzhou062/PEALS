@@ -231,6 +231,7 @@ def add_filter_option ( parser ):
                         default = 0.05,
                         help = "If specified, only peaks have adjusted p-value (FDR) <= --padj will be recognized significant peaks.")
     parser.add_argument("--padj-method", dest = "padjmethod", type = str,
+                        choices=["holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none"],
                         default = 'BH',
                         help = "The method used to calculate adjusted p-value")
 
