@@ -1,9 +1,9 @@
 {% set name = "peals" %}
-{% set version = "1.2.1" %}
+{% set version = "1.2.2" %}
 
 package:
   name: "{{ peals }}"
-  version: "{{ 1.2.1 }}"
+  version: "{{ 1.2.2 }}"
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz

@@ -167,7 +167,8 @@ def checkMatrixFile(options):
     if len(idColValList) != len(set(idColValList)):
         parssingMatrixError("The value of 'id' column should be unique.")
     ## check header
-    requiredColNameList = ["id", "library", "condition", "replicate", "label", "bam", "binary"]
+    #requiredColNameList = ["id", "library", "condition", "replicate", "label", "bam", "binary"]
+    requiredColNameList = ["id", "library", "condition", "replicate", "label", "bam"]
     for colName in requiredColNameList:
         if colName not in headerList:
             parssingMatrixError("The column {} is required!".format(colName))
