@@ -19,6 +19,7 @@ PEALS relies on the following third party software. Before installing PEALS, ple
  * [featureCounts (>=2.0.2)](https://subread.sourceforge.net/featureCounts.html)
 
 The following R pacakges should be also installed.
+ * [getopt (>=1.20.3)](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
  * [DESeq2 (>=1.32.0)](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
  * [ggplot2 (>=3.4.1)](https://ggplot2.tidyverse.org/index.html)
  * [ashr (>=2.2.54)](https://github.com/stephens999/ashr)

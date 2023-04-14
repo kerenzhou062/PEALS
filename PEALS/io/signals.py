@@ -331,7 +331,7 @@ def getReadCountsDf(options, annoFile, annoType, bamFileList, normalize=False, k
         fractionParam = "--fraction"
     else:
         fractionParam = ''
-    uniqueParam = "-C -M -O {}".format(fractionParam)
+    ## fraction parameter
     fracOverlapParam = '--fracOverlap {}'.format(options.fracoverlap)
     ## whether to sort
     if options.sortbam is True:
@@ -346,10 +346,12 @@ def getReadCountsDf(options, annoFile, annoType, bamFileList, normalize=False, k
     ## count pair or extend
     if options.pairend is True:
         ##command = 'featureCounts -a {} -F {} {} -o {} -s {} -T {} -p {} --countReadPairs {} {} {}'
+        uniqueParam = "-C -M -O {}".format(fractionParam)
         ## remove the countReadParis will greatly speed-up the program
         command = 'featureCounts -a {} -F {} {} -o {} -s {} -T {} -p {} {} {} {} {}'
         command = command.format(annoFile, annoFormat, identifier, countTmp.name, options.library, options.thread, fracOverlapParam, uniqueParam, sortParam, dupParam, bamFileParam)
     else:
+        uniqueParam = "-M -O {}".format(fractionParam)
         command = 'featureCounts -a {} -F {} {} -o {} -s {} -T {} {} {} {} {} {} {}'
         command = command.format(annoFile, annoFormat, identifier, countTmp.name, options.library, options.thread, fracOverlapParam, extsizeParam, uniqueParam, sortParam, dupParam, bamFileParam)
     ## debug
