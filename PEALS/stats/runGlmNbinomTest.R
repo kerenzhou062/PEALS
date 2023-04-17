@@ -14,7 +14,7 @@ command =  matrix(c(
     "output" ,      "o",   1,  "character",   "Output directory",
     "plot",         "p",   0,  "logical",     "Set to plot the output",
     "padjust",      "j",   1,  "character",   "The method to use for adjusting p-values, see ?p.adjust",
-    "temp",         "T",   1,  "character",   "Prefix for temporary output",
+    "temp",         "T",   1,  "character",   "Prefix for temporary output (including path)",
     "prefix",       "e",   1,  "character",   "Prefix for output",
     "reduced",      "i",   1,  "character",   "The reduced formula for DESeq(dds, test=\"LRT\", reduced=)",
     "relevel",      "w",   1,  "character",   "Relevel the sample data for comparison (eg. 'genotype:control,antibody:input', 'control' and 'input' will set as ref)",
@@ -56,8 +56,9 @@ LoadPacakge <- function(name) {
 }
 
 ## output function
-DfwriteToFile <- function(df, output, prefix, appendix) {
-  resultFile <- file.path(output, paste(prefix, appendix, sep=""))
+DfwriteToFile <- function(df, prefix, appendix) {
+  ## the prefix including path
+  resultFile <- paste(prefix, appendix, sep="")
   output.file <- file(resultFile, "wb")
   df <- cbind(peakid = rownames(df), df)
   write.table(as.data.frame(df), sep="\t", eol = "\n", 
@@ -125,6 +126,7 @@ if ( is.null(args$cpu) ) {
 
 ## load arguments
 mean <- args$mean
+tempPrefix <- args$temp
 fitType <- args$fittype
 test <- args$test
 shrink <- args$shrink
@@ -202,7 +204,7 @@ sizeFactorDf <- as.data.frame(as.matrix(dds$sizeFactor))
 ## input_0_1   1.2220192
 ## input_0_0   1.1333223
 
-DfwriteToFile(sizeFactorDf, args$output, args$temp, '.sizefactor.txt')
+DfwriteToFile(sizeFactorDf, tempPrefix, '.sizefactor.txt')
 
 ## continue
 resultsNameVector <- resultsNames(dds)
@@ -221,11 +223,11 @@ res$padj <- p.adjust(res$pvalue, method="BH")
 
 ########################################## result files ###########################################
 # output DESeq2 result
-DfwriteToFile(as.data.frame(res), output, args$temp, ".glm.txt")
+DfwriteToFile(as.data.frame(res), tempPrefix, ".glm.txt")
 
 # output normalzed counts
 normalzedCounts <- counts(dds, normalized=TRUE)
-DfwriteToFile(as.data.frame(normalzedCounts), output, args$temp, ".normalized.counts.txt")
+DfwriteToFile(as.data.frame(normalzedCounts), tempPrefix, ".normalized.counts.txt")
 
 ########################################## plots ###########################################
 ## plot functions

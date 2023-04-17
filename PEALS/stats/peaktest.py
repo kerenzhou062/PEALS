@@ -284,7 +284,7 @@ def runGlmNbinomTest(options, peakReadCountDf, plot=True, skipSubplot=False):
         'padjmethod': options.padjmethod,
         'testmethod': options.test,
         'fittype': options.fittype,
-        "temp": tempPrefixName,
+        "temp": tempPrefix,
         'outputdir': options.outputdir,
         'plot': plot,
         'skipsize': skipsize,
