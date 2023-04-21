@@ -1,4 +1,4 @@
-# Call peaks
+# Call differentially methylated peaks
 
 This is the main function in PEALS. It can be invoked by `PEALS
 callpeak` . If you type this command with `-h`, you will see a full
