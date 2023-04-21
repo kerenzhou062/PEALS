@@ -14,7 +14,7 @@ Please chek an example [sample matrix](https://github.com/kerenzhou062/PEALS/blo
 
 ### `-s`/`--sample FILENAME`
 
-If specified, will select samples in an additional column of sample matrix ('--matrix') used for testing by the following format: "column_name:value", in which the value should be unique for each condition, e.g., "group:HeLa_control".
+If specified, will select samples in an additional column of sample matrix ('--matrix') used for testing by the following format: "column_name:value", in which the value should be unique for each condition, e.g., "group:HeLa_control" (only samples in "group" column with value "HeLa_control" will be processed).
 
 ### `-i`/`--input DIRECTORY`
 
