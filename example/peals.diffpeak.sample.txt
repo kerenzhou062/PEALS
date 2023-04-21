@@ -1,9 +1,9 @@
-id	library	condition	replicate	label	bam
-HepG2_control_input_rep1	input	control	1	HepG2_control_rep1	HepG2_control_input_rep1.genome.sorted.bam
-HepG2_control_input_rep2	input	control	2	HepG2_control_rep2	HepG2_control_input_rep2.genome.sorted.bam
-HepG2_control_IP_rep1	ip	control	1	HepG2_control_rep1	HepG2_control_IP_rep1.genome.sorted.bam
-HepG2_control_IP_rep2	ip	control	2	HepG2_control_rep2	HepG2_control_IP_rep2.genome.sorted.bam
-HepG2_shMETTL3_input_rep1	input	treated	1	HepG2_shMETTL3_rep1	HepG2_shMETTL3_input_rep1.genome.sorted.bam
-HepG2_shMETTL3_input_rep2	input	treated	2	HepG2_shMETTL3_rep2	HepG2_shMETTL3_input_rep2.genome.sorted.bam
-HepG2_shMETTL3_IP_rep1	ip	treated	1	HepG2_shMETTL3_rep1	HepG2_shMETTL3_IP_rep1.genome.sorted.bam
-HepG2_shMETTL3_IP_rep2	ip	treated	2	HepG2_shMETTL3_rep2	HepG2_shMETTL3_IP_rep2.genome.sorted.bam
+id	library	condition	replicate	label	bam	group
+HepG2_control_input_rep1	input	control	1	HepG2_control_rep1	HepG2_control_input_rep1.genome.sorted.bam	HepG2_control
+HepG2_control_input_rep2	input	control	2	HepG2_control_rep2	HepG2_control_input_rep2.genome.sorted.bam	HepG2_control
+HepG2_control_IP_rep1	ip	control	1	HepG2_control_rep1	HepG2_control_IP_rep1.genome.sorted.bam	HepG2_control
+HepG2_control_IP_rep2	ip	control	2	HepG2_control_rep2	HepG2_control_IP_rep2.genome.sorted.bam	HepG2_control
+HepG2_shMETTL3_input_rep1	input	treated	1	HepG2_shMETTL3_rep1	HepG2_shMETTL3_input_rep1.genome.sorted.bam	HepG2_shMETTL3
+HepG2_shMETTL3_input_rep2	input	treated	2	HepG2_shMETTL3_rep2	HepG2_shMETTL3_input_rep2.genome.sorted.bam	HepG2_shMETTL3
+HepG2_shMETTL3_IP_rep1	ip	treated	1	HepG2_shMETTL3_rep1	HepG2_shMETTL3_IP_rep1.genome.sorted.bam	HepG2_shMETTL3
+HepG2_shMETTL3_IP_rep2	ip	treated	2	HepG2_shMETTL3_rep2	HepG2_shMETTL3_IP_rep2.genome.sorted.bam	HepG2_shMETTL3

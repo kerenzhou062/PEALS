@@ -8,9 +8,13 @@ description of command-line options. Here we only list the essentials.
 
 ### `-m`/`--matrix FILENAME`
 
-The tab-separated matrix contain all information of input samples. Header format:`label,library,condition,sample,replicate,bam,binary,...`.
+The tab-separated matrix contain all information of input samples. Header format:`label,library,condition,sample,replicate,bam,...`.
 
 Please chek an example [sample matrix](https://github.com/kerenzhou062/PEALS/blob/main/example/peals.diffpeak.sample.txt) here as reference.
+
+### `-s`/`--sample FILENAME`
+
+If specified, will select samples in an additional column of sample matrix ('--matrix') used for testing by the following format: "column_name:control=value1,treated=value2", in which the value should be unique for each condition, e.g., "group:control=HeLa_control,treated=HeLa_treated".
 
 ### `-i`/`--input DIRECTORY`
 
