@@ -245,6 +245,11 @@ def add_callpeak_parser( subparsers ):
     ## group for input
     group_input = argparser_callpeak.add_argument_group( "Input options" )
     add_input_option( group_input )
+    ## add subset sample option
+    group_input.add_argument("-s", "--sample", dest = "sample", type = str,
+                        help = "If specified, will select samples in an additional column of sample matrix ('--matrix') used for testing \
+                        by the following format: \"column_name:value\", in which the value should be unique for each condition, \
+                        e.g., \"group:HeLa_control\".")
     ## group for output
     group_output = argparser_callpeak.add_argument_group( "Output options" )
     add_output_option( group_output )
@@ -288,6 +293,12 @@ def add_diffpeak_parser( subparsers ):
     ## group for input
     group_input = argparser_callpeak.add_argument_group( "Input files options" )
     add_input_option( group_input )
+    ## add subset sample option
+    group_input.add_argument("-s", "--sample", dest = "sample", type = str,
+                        help = "If specified, will select samples in an additional column of sample matrix ('--matrix') used for testing \
+                        by the following format: \"column_name:control=value1,treated=value2\", \
+                        in which the value should be unique for each condition, \
+                        e.g., \"group:control=HeLa_control,treated=HeLa_treated\".")
     ## group for output
     group_output = argparser_callpeak.add_argument_group( "Output files options" )
     add_output_option( group_output )

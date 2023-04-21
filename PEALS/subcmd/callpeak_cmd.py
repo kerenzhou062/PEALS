@@ -56,6 +56,7 @@ def run( args ):
     ## info
     info("Reading information from input sample matrix file ({}).".format(os.path.basename(options.matrix)))
     options = functools.buildFullMatrix(options)
+    debug("The final information of input sample matrix file is as follow:{}".format(options.matrixdf.to_markdown()))
     ## output buildFullMatrix to tempory file
     fullMatrixFile = tempPrefix + '.fullmatrix.tmp'
     options.matrixdf.to_csv(fullMatrixFile, sep='\t', header=True, index=True)

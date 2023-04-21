@@ -28,6 +28,10 @@ from PEALS.io import paramlog
 
 cpuCount = psutil.cpu_count()
 
+def exitError(message):
+    logging.error(message)
+    sys.exit(1)
+
 def parseError(option):
     message = "Error when parssing '--{}' option.".format(option)
     return message
@@ -40,8 +44,7 @@ def parseAvail(values):
 def checkArgsEqual(option1, option2, optionName1, optionName2):
     if len(option1) != len(option2):
         logging.error("Error when parssing '--{}' and '--{}' option.".format(optionName1, optionName2))
-        logging.error("The number of input arguments of '--{}' and '--{}' option should be the same!".format(optionName1, optionName2))
-        sys.exit(1)
+        exitError("The number of input arguments of '--{}' and '--{}' option should be the same!".format(optionName1, optionName2))
 
 def checkThirdParty(options):
     logging.info("Checking whether required third party software are properly installed...")
@@ -54,8 +57,7 @@ def checkThirdParty(options):
             failureList.append(software)
     if len(failureList) > 1:
         softwares = ', '.join(failureList)
-        logging.error("The following third party sofware is not installed or not found in your path environment: ({}).".format(softwares))
-        sys.exit(1)
+        exitError("The following third party sofware is not installed or not found in your path environment: ({}).".format(softwares))
     else:
         logging.info("Congratulations! All required third party software are properly installed!")
 
@@ -66,6 +68,22 @@ def checkThead(options):
     elif options.thread <= 0:
         options.thread = 1
     return options
+
+def checkSample(options):
+    inforDict = functools.decodeSample(options)
+    count = len(inforDict['value'])
+    if options.subprogram == 'callpeak':
+        ##key: column,value
+        if count != 1:
+            exitError(parseError('sample'))
+    elif options.subprogram == 'diffpeak':
+        ##key: column,value,control,treated
+        keyList = sorted(inforDict.keys())
+        if 'control' not in keyList or 'treated' not in keyList:
+            exitError(parseError('sample'))
+        if count != 2:
+            exitError(parseError('sample'))
+    return inforDict
 
 def checkSplitSize(options):
     ## Value for split a transcript
@@ -78,8 +96,7 @@ def checkSplitSize(options):
 def checkVerbose(options):
     if options.verbose > 3:
         logging.error(parseError('verbose'))
-        logging.error(parseAvail([0, 1, 2, 3]))
-        sys.exit(1)
+        exitError(parseAvail([0, 1, 2, 3]))
 
 def chekFolder(folder, default, optionName):
     if folder is None:
@@ -92,15 +109,13 @@ def chekFolder(folder, default, optionName):
             os.makedirs(folder, exist_ok=True)
         except:
             logging.error(parseError(optionName))
-            logging.error("Output directory ({}) could not be created. Terminating program.".format(folder))
-            sys.exit(1)
+            exitError("Output directory ({}) could not be created. Terminating program.".format(folder))
 
 def checkArgsIsFile(*argsFiles, optionName):
     for argsFile in argsFiles:
         if os.path.isfile(argsFile) is False:
             logging.error(parseError(optionName))
-            logging.error("At least one invalid file detected in '--{}' option!".format(optionName))
-            sys.exit(1)
+            exitError("At least one invalid file detected in '--{}' option!".format(optionName))
 
 def readInputFromFile(fileList, optionName, extension):
     parsedFileList = []
@@ -128,8 +143,7 @@ def readInputFromFile(fileList, optionName, extension):
             sys.exit(1)
     else:
         logging.error(parseError(optionName))
-        logging.error("The input should be files with '{}' extension.".format(extension))
-        sys.exit(1)
+        exitError("The input should be files with '{}' extension.".format(extension))
 
 def checkInputFileOption(fileList, optionName, extension, readFlag=False):
     isFlag = True
@@ -148,8 +162,7 @@ def checkInputFileOption(fileList, optionName, extension, readFlag=False):
 
 def parssingMatrixError(message):
     logging.error(parseError('matrix'))
-    logging.error(message)
-    sys.exit(1)
+    exitError(message)
 
 def checkMatrixFile(options):
     ## check the header
@@ -171,18 +184,42 @@ def checkMatrixFile(options):
     requiredColNameList = ["id", "library", "condition", "replicate", "label", "bam"]
     for colName in requiredColNameList:
         if colName not in headerList:
-            parssingMatrixError("The column {} is required!".format(colName))
+            parssingMatrixError("The column ({}) is required!".format(colName))
     ##parsing sample matrix
     matrixDf = pd.read_csv(options.matrix, header=0, sep="\t", index_col=0, skiprows=0)
+    ## if needs to sample subset
+    if options.sample is not None:
+        inforDict = checkSample(options)
+        subsetCol = inforDict['column']
+        subsetValList = inforDict['value']
+        ## whether the column in matrix
+        if subsetCol not in matrixDf.columns:
+            parssingMatrixError("The column ({}) is not in sample matrix!".format(subsetCol))
+        ## subset the matrix
+        matrixDf = matrixDf.loc[matrixDf[subsetCol].isin(subsetValList)]
+        ## whether the subet matrix is empty
+        if matrixDf.empty is True:
+            values = ','.join(subsetValList)
+            parssingMatrixError("Values ({}) is not found in the column ({})in sample matrix!".format(values, subsetCol))
+        ## check and change the condition for diffpeak
+        if options.subprogram == 'callpeak':
+            value = subsetValList[0]
+            matrixDf.loc[matrixDf[subsetCol] == value, 'condition'] = 'control'
+        elif options.subprogram == 'diffpeak':
+            ##rename the condition in sample matrix
+            conditionList = ['control', 'treated']
+            for condition in conditionList:
+                value = inforDict[condition]
+                matrixDf.loc[matrixDf[subsetCol] == value, 'condition'] = condition
     ### check condition
     conditionList = sorted(matrixDf['condition'].unique())
     conditionCount = len(conditionList)
     if conditionCount == 1:
         if conditionList[0] != 'control' and conditionList[0] != 'treated':
-            parssingMatrixError("The value  in column 'condition' should be either 'control' or 'treated' when you have only 1 condition!")
+            parssingMatrixError("The value  in column 'condition' should be either 'control' or 'treated' when running 'callpeak' subcommand!")
     elif conditionCount == 2:
         if conditionList != ['control', 'treated']:
-            parssingMatrixError("The values in column 'condition' should be 'control' and 'treated' when you have 2 conditions!")
+            parssingMatrixError("The values in column 'condition' should be 'control' and 'treated' when running 'diffpeak' subcommand!")
     else:
         parssingMatrixError("Currently only support at most 2 conditions in a test ('control' and 'treat').")
     ## check library
@@ -239,6 +276,8 @@ def validateCallpeakArgs(options):
                         stream=sys.stderr,
                         filemode="w"
                         )
+    ## subprogram
+    options.subprogram = 'callpeak'
     # function alias
     options.error = logging.error
     options.warn  = logging.warning
@@ -295,6 +334,8 @@ def validateDiffpeakArgs(options):
                         stream=sys.stderr,
                         filemode="w"
                         )
+    ## subprogram
+    options.subprogram = 'diffpeak'
     # function alias
     options.error = logging.error
     options.warn  = logging.warning

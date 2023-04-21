@@ -13,6 +13,7 @@ def glue(param, value):
 def log(options):
     inputParamDict = {'inputdir':'input', 'matrix':'matrix', 'binarydir':'binary-dir', \
                       'binary':'call-with-binary', 'recursive':'recursive', 'rnatype':'type', \
+                      'sample':'sample', \
                      }
     outputParamDict = {'outputdir':'output', 'tempdir':'temp', 'prefix':'prefix', \
                       'nobwtrack':'no-bwtrack', 'keeptemp':'keep-temp', 'verbose':'verbose', \

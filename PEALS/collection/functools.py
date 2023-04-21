@@ -102,6 +102,29 @@ def subprocessToList(command, errorFlag=False):
     runResRowList = list(map(lambda x:x.split('\t'), list(filter(lambda x: bool(x), runResList))))
     return runResRowList
 
+def decodeSample(options):
+    ##column_name:value or column_name:control=value1,treated=value2
+    inforDict = {}
+    ## must have keys, ['column', 'control'] or ['column', 'control', 'treated']
+    column, infor = options.sample.split(':')
+    ## record column name
+    inforDict['column'] = column
+    ## record value
+    inforList = infor.split(',')
+    if options.subprogram == 'callpeak':
+        inforDict['value'] = inforList
+    elif options.subprogram == 'diffpeak':
+        valueList = []
+        ## decode value for each condition
+        for eachInfo in inforList:
+            condition, value = eachInfo.split('=')
+            inforDict[condition] = value
+            valueList.append(value)
+        valueList = list(set(valueList))
+        ## record all values
+        inforDict['value'] = valueList
+    return inforDict
+
 def getReadLength(bamFile):
     command = 'samtools view {} | head -n 100 | awk \'{{print $10}}\''.format(bamFile)
     readRowList = subprocessToList(command)
@@ -222,10 +245,31 @@ def buildBinaryLinkDict(options):
         binaryFileDict[baseName] = fileFullPath
     return binaryFileDict
 
+def subsetMatrix(options, matrixDf):
+    if options.sample is not None:
+        inforDict = decodeSample(options)
+        subsetCol = inforDict['column']
+        subsetValList = inforDict['value']
+        ## subset the matrix
+        matrixDf = matrixDf.loc[matrixDf[subsetCol].isin(subsetValList)]
+        ## check and change the condition for diffpeak
+        if options.subprogram == 'callpeak':
+            value = subsetValList[0]
+            matrixDf.loc[matrixDf[subsetCol] == value, 'condition'] = 'control'
+        elif options.subprogram == 'diffpeak':
+            ##rename the condition in sample matrix
+            conditionList = ['control', 'treated']
+            for condition in conditionList:
+                value = inforDict[condition]
+                matrixDf.loc[matrixDf[subsetCol] == value, 'condition'] = condition
+    return matrixDf
+
 def decodeMatrix(options):
     ## get sample matrix
     bamLinkDict = buildBamLinkDict(options)
     matrixDf = pd.read_csv(options.matrix, header=0, sep="\t", index_col=0, skiprows=0)
+    ## subset matrix if neeeded
+    matrixDf = subsetMatrix(options, matrixDf)
     ## load with binary files if necessary
     if options.binary is True:
         binaryFileDict = buildBinaryLinkDict(options)

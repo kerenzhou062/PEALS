@@ -61,7 +61,7 @@ def main():
 
     setup( name = "PEALS",
            version = VERSION,
-           description = "Peak-based Enhancement Analysis Pipeline for MeRIP-Seq",
+           description = "Peak-based Enhancement Analysis PipeLine for MeRIP-Seq",
            long_description = longDescription,
            long_description_content_type = "text/markdown",
            include_package_data=True,

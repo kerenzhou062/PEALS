@@ -1,10 +1,10 @@
 [project]
 name = "PEALS"
-version = "1.2.2"
+version = "1.2.3"
 authors = [
   { name="Keren Zhou", email="zhoukr062@gmail.com" },
 ]
-description = "Peak-based Enhancement Analysis pipeLine for MeRIP-seq"
+description = "Peak-based Enhancement Analysis PipeLine for MeRIP-seq"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
