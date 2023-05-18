@@ -287,7 +287,7 @@ def normalizeReadCountDf(options, expMethod, readCountDf):
     totalReadDf = countDf.sum(axis=0)
     if expMethod == 'count':
         norExpDf = countDf
-    elif expMethod == 'FRPKM':
+    elif expMethod == 'FPKM':
         norExpDf = countDf.div(lengthDf, axis=0).div(totalReadDf, axis=1).multiply(1e9)
     elif expMethod == 'TPM':
         countPerbpDf = countDf.div(lengthDf, axis=0)
