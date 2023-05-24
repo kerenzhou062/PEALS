@@ -91,7 +91,7 @@ def normalizeByEnrichment(options, peakReadCountDf, geneInputReadCountDf):
         ## normalize by the library size first
         libSizeDf = subMatrixDf.loc[ipBamidList, :]['lib_size']
         libSizeFactor = libSizeDf.div(libSizeDf.min())
-        options.debug("Normalize IP reads count by sequencing depth with library size factors:\n" + libSizeFactor.to_markdown())
+        options.info("Normalize IP reads count by sequencing depth with library size factors:\n" + libSizeFactor.to_markdown())
         peakNorIpDf = peakIpDf.div(libSizeFactor)
         ## get gene reads count df
         peakOnlyNorInputDf = peakGeneInputDf.loc[peakidList, ]
@@ -106,17 +106,17 @@ def normalizeByEnrichment(options, peakReadCountDf, geneInputReadCountDf):
             ## determining the the size factor with median-of-ratio
             ipSizeFactorSeries = calMedianRatio(ipEfficiencyDf)
             ## debug
-            options.debug("Normalize IP read counts ({}) by estimated IP efficiency factor:\n".format(condition) + ipSizeFactorSeries.to_markdown())
+            options.info("Normalize IP read counts ({}) by estimated IP efficiency factor:\n".format(condition) + ipSizeFactorSeries.to_markdown())
             ## normalize by calcualted IP efficiency factors
             peakNorIpDf.loc[:, bamidList] = normalizeCountDf(peakNorIpDf.loc[:, bamidList], ipSizeFactorSeries)
     elif options.estipeff == 'across':
         ## only use peaks that are higher than 25% in all samples
-        options.debug("only use peaks that are higher than 25\% in all samples.")
-        peakOnlyIpDf = peakOnlyIpDf[ peakOnlyIpDf > peakOnlyIpDf.quantile(0.25) ]
+        options.info("only use top 50\% enriched peaks in all samples.")
+        peakOnlyIpDf = peakOnlyIpDf[ peakOnlyIpDf > peakOnlyIpDf.quantile(0.5) ]
         ## filter out rows contain NaN in any columns
         peakOnlyIpDf = peakOnlyIpDf[peakOnlyIpDf.notnull().all(1)]
         peakidList = peakOnlyIpDf.index.to_list()
-        options.debug("{} of peak candidates used for calculating the IP efficiency factors.".format(len(peakidList)))
+        options.info("{} of peak candidates used for calculating the IP efficiency factors.".format(len(peakidList)))
         ## retrive corresponding gene counts
         peakOnlyNorInputDf = peakGeneInputDf.loc[peakidList, ]
         ## divide the IP reads count by gene counts
@@ -124,7 +124,7 @@ def normalizeByEnrichment(options, peakReadCountDf, geneInputReadCountDf):
         ## determining the the size factor with median-of-ratio
         ipSizeFactorSeries = calMedianRatio(ipEfficiencyDf)
         ## debug
-        options.debug("Normalize IP read counts by estimated IP efficiency factor:\n" + ipSizeFactorSeries.to_markdown())
+        options.info("Normalize IP read counts by estimated IP efficiency factor:\n" + ipSizeFactorSeries.to_markdown())
         ## normalize by calcualted IP efficiency factors
         peakNorIpDf = normalizeCountDf(peakIpDf, ipSizeFactorSeries)
     return [peakNorIpDf, peakNorInputDf]
