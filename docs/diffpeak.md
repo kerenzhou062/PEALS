@@ -1,7 +1,11 @@
 # Call differentially methylated peaks
 
-This is the main function in PEALS. It can be invoked by `PEALS
-callpeak` . If you type this command with `-h`, you will see a full
+This is the main function in `PEALS`. It can be invoked by `PEALS
+callpeak` .
+
+Please note that `PEALS` will need the raw sequencing depth information during the normalization, so I recommend to use `samtools markdup` command to mark the PCR duplciates after reads alignment and pass thenm to `PEALS`.
+
+If you type this command with `-h`, you will see a full
 description of command-line options. Here we only list the essentials.
 
 ## Input Options

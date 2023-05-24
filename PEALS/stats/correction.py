@@ -71,7 +71,7 @@ def normalizeByEnrichment(options, peakReadCountDf, geneInputReadCountDf):
     for peakid in peakReadCountDf.index:
         geneid = peakid.split(options.idsepdict['peakid'])[0].split(options.idsepdict['genetx'])[0]
         peakGeneDict[geneid].append(peakid)
-    ## get read count df of peak
+    ## get IP read count df of peak
     peakIpDf = peakReadCountDf.loc[:, ipBamidList]
     ## copy peakIpDf to a new df
     peakGeneInputDf = peakIpDf.copy()
