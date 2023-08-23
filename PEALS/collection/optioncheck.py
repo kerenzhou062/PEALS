@@ -104,12 +104,12 @@ def checkFolder(folder, default, optionName):
             folder = os.path.realpath(os.getcwd())
         else:
             folder = default
-    else:
-        try:
-            os.makedirs(folder, exist_ok=True)
-        except:
-            logging.error(parseError(optionName))
-            exitError("Output directory ({}) could not be created. Terminating program.".format(folder))
+    try:
+        os.makedirs(folder, exist_ok=True)
+    except:
+        logging.error(parseError(optionName))
+        exitError("Output directory ({}) could not be created. Terminating program.".format(folder))
+    return folder
 
 def checkArgsIsFile(*argsFiles, optionName):
     for argsFile in argsFiles:
@@ -291,11 +291,11 @@ def validateCallpeakArgs(options):
     ## check sample matrix
     checkMatrixFile(options)
     # determin outputdir
-    checkFolder(options.outputdir, 'cwd', 'output')
+    options.outputdir = checkFolder(options.outputdir, 'cwd', 'output')
     # determin temdir
-    checkFolder(options.tempdir, options.outputdir, 'temp')
+    options.tempdir = checkFolder(options.tempdir, options.outputdir, 'temp')
     # determin binarydir
-    checkFolder(options.binarydir, options.outputdir, 'binary')
+    options.binarydir = checkFolder(options.binarydir, options.outputdir, 'binary')
     ## constant
     options.idsepdict = ID_SEP_DICT
     options.tempre = TEMP_PREFIX
@@ -349,11 +349,11 @@ def validateDiffpeakArgs(options):
     ## check sample matrix
     checkMatrixFile(options)
     # determin outputdir
-    checkFolder(options.outputdir, 'cwd', 'output')
+    options.outputdir = checkFolder(options.outputdir, 'cwd', 'output')
     # determin temdir
-    checkFolder(options.tempdir, options.outputdir, 'temp')
+    options.tempdir = checkFolder(options.tempdir, options.outputdir, 'temp')
     # determin binarydir
-    checkFolder(options.binarydir, options.outputdir, 'binary')
+    options.binarydir = checkFolder(options.binarydir, options.outputdir, 'binary')
     ## constant
     options.idsepdict = ID_SEP_DICT
     options.tempre = TEMP_PREFIX
