@@ -98,7 +98,7 @@ def checkVerbose(options):
         logging.error(parseError('verbose'))
         exitError(parseAvail([0, 1, 2, 3]))
 
-def chekFolder(folder, default, optionName):
+def checkFolder(folder, default, optionName):
     if folder is None:
         if default == 'cwd':
             folder = os.path.realpath(os.getcwd())
@@ -291,11 +291,11 @@ def validateCallpeakArgs(options):
     ## check sample matrix
     checkMatrixFile(options)
     # determin outputdir
-    chekFolder(options.outputdir, 'cwd', 'output')
+    checkFolder(options.outputdir, 'cwd', 'output')
     # determin temdir
-    chekFolder(options.tempdir, options.outputdir, 'temp')
+    checkFolder(options.tempdir, options.outputdir, 'temp')
     # determin binarydir
-    chekFolder(options.binarydir, options.outputdir, 'binary')
+    checkFolder(options.binarydir, options.outputdir, 'binary')
     ## constant
     options.idsepdict = ID_SEP_DICT
     options.tempre = TEMP_PREFIX
@@ -349,11 +349,11 @@ def validateDiffpeakArgs(options):
     ## check sample matrix
     checkMatrixFile(options)
     # determin outputdir
-    chekFolder(options.outputdir, 'cwd', 'output')
+    checkFolder(options.outputdir, 'cwd', 'output')
     # determin temdir
-    chekFolder(options.tempdir, options.outputdir, 'temp')
+    checkFolder(options.tempdir, options.outputdir, 'temp')
     # determin binarydir
-    chekFolder(options.binarydir, options.outputdir, 'binary')
+    checkFolder(options.binarydir, options.outputdir, 'binary')
     ## constant
     options.idsepdict = ID_SEP_DICT
     options.tempre = TEMP_PREFIX
