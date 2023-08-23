@@ -384,7 +384,7 @@ def getReadCountsDf(options, annoFile, annoType, bamFileList, normalize=False, k
         columNameList = bamidList
     else:
         columNameList = [ lenColName ] + bamidList
-    readCountDf.set_axis(columNameList, axis=1, inplace=True)
+    readCountDf = readCountDf.set_axis(columNameList, axis=1)
     ## data structure of readCountDf, gene
     '''readCountDf
                        length shNS_input_rep1  shNS_input_rep2  shNS_IP_rep1  shNS_IP_rep2
