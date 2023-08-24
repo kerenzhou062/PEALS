@@ -1,7 +1,7 @@
 # PEALS: Peak-based Enhancement Analysis PipeLine for MeRIP-Seq
 
 Latest Release:
-* Github: [![Github Release](https://img.shields.io/github/v/release/peals-project/PEALS)](https://github.com/kerenzhou062/PEALS/releases)
+* Github: [![Github Release](https://img.shields.io/badge/peals-v1.2.3.1-blue)](https://github.com/kerenzhou062/PEALS/releases)
 * PyPI: [![PyPI Release](https://img.shields.io/pypi/v/peals.svg) ![PyPI Python Version](https://img.shields.io/pypi/pyversions/peals) ![PyPI Format](https://img.shields.io/pypi/format/peals)](https://pypi.org/project/peals/)
 
 ## Introduction
