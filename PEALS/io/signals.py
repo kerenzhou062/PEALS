@@ -31,7 +31,8 @@ def readGenomeSize(options):
 
 def convertBgToDataFrame(bedGraphFile, strand):
     ## load bedGraph into pandas dataframe
-    baseReadCovDf = pd.read_csv(bedGraphFile, header=None, sep="\t", index_col=0, skiprows=0)
+    ### make index (chromosomes) as string type
+    baseReadCovDf = pd.read_csv(bedGraphFile, header=None, sep="\t", index_col=0, skiprows=0, dtype={0:str})
     ## add strand information to column 4
     if strand == '+':
         baseReadCovDf[4] = 0
