@@ -14,7 +14,7 @@ identifying enriched methylation regions. PEALS is designed for capturing the en
 
 PEALS relies on the following third party software. Before installing PEALS, please to ensure the following software have been properly installed.
 
- * [bedTools (>=2.30.0)](https://bedtools.readthedocs.io/en/latest/content/installation.html)
+ * [bedtools (>=2.30.0)](https://bedtools.readthedocs.io/en/latest/content/installation.html)
  * [samtools (>=1.14)](http://www.htslib.org/download/)
  * [featureCounts (>=2.0.2)](https://subread.sourceforge.net/featureCounts.html)
 
